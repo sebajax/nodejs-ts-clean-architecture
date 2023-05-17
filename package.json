@@ -17,11 +17,13 @@
   },
   "dependencies": {
     "@cloudnative/health-connect": "^2.1.0",
+    "@types/joi": "^17.2.3",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "helmet": "^7.0.0",
     "http-status-codes": "^2.2.0",
+    "joi": "^17.9.2",
     "morgan": "^1.10.0",
     "winston": "^3.8.2"
   }
