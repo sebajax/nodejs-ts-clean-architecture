@@ -4,11 +4,13 @@ import {Logger} from 'winston';
 import {ObjectSchema} from 'joi';
 import {StatusCodes} from 'http-status-codes';
 import {ILogDomain} from '../domain/logger.domain';
+import {IResponseDomain} from '../domain/response.domain';
 
 export default function makeAddMessageController(
   logger: Logger,
   logMessage: ILogDomain,
-  addMessageSchema: ObjectSchema
+  addMessageSchema: ObjectSchema,
+  addMessageService: Function
 ): RequestHandler {
   return async function addMessageController(
     req: Request,
@@ -25,8 +27,6 @@ export default function makeAddMessageController(
     try {
       // validate request with schema
       const {error: errorRequest} = addMessageSchema.validate(body);
-      console.log(errorRequest);
-      console.log(typeof errorRequest);
       if (errorRequest !== undefined) {
         logger.warn(
           logMessage.error(
@@ -41,7 +41,11 @@ export default function makeAddMessageController(
           .send({error: true, message: errorRequest.details[0].message});
       }
 
-      return res.status(StatusCodes.CREATED).send({body});
+      // call service
+      const {error, message, code, data}: IResponseDomain =
+        await addMessageService(body);
+
+      return res.status(code).send({error, message, data});
     } catch (error) {
       logger.error(
         `requestMethod: ${req.method}, controller: ${controller}, SERVER_ERROR ${error}`
