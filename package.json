@@ -1,16 +1,28 @@
 {
   "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/morgan": "^1.9.4",
+    "@types/node": "^14.11.2",
     "gts": "^3.1.1",
-    "typescript": "~4.7.0",
-    "@types/node": "^14.11.2"
+    "ts-node-dev": "^2.0.0",
+    "typescript": "~4.7.0"
   },
   "scripts": {
+    "dev": "ts-node-dev --poll --respawn --transpile-only --no-deps --exit-child ./src/app.ts",
     "lint": "gts lint",
     "clean": "gts clean",
     "compile": "tsc",
-    "fix": "gts fix",
-    "prepare": "npm.cmd run compile",
-    "pretest": "npm.cmd run compile",
-    "posttest": "npm.cmd run lint"
+    "fix": "gts fix"
+  },
+  "dependencies": {
+    "@cloudnative/health-connect": "^2.1.0",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "helmet": "^7.0.0",
+    "http-status-codes": "^2.2.0",
+    "morgan": "^1.10.0",
+    "winston": "^3.8.2"
   }
 }

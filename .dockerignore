@@ -1,0 +1,17 @@
+.git
+.gitignore
+.dockerignore
+Dockerfile
+Dockerfile.dev
+node_modules
+npm-debug.log
+README.md
+LICENSE
+dist
+.editorconfig
+.env
+.eslintconfig
+.eslintrc.json
+.prettierrc.js
+docker-compose.yaml
+nodejs_logo.png
