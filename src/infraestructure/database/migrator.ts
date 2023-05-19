@@ -1,4 +1,4 @@
-// module imports
+// module import
 import {Umzug, SequelizeStorage} from 'umzug';
 // db import
 import db from './db';

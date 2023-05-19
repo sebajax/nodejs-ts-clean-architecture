@@ -1,4 +1,4 @@
-// module imports
+// module import
 import {Sequelize} from 'sequelize';
 // logger import
 import logger from '../log/logger';

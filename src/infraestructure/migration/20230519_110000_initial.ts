@@ -1,5 +1,6 @@
-// module imports
+// module import
 import {DataTypes} from 'sequelize';
+// migration type import
 import {Migration} from '../database/migrator';
 
 export const up: Migration = async ({
