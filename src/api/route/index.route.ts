@@ -24,7 +24,7 @@ router.get('/status', (_req: Request, res: Response): Response => {
   );
 });
 
-// insert a new message
+// add a new message
 router.post('/messages', checkBodyMiddleware, addMessageController);
 
 export default router;
