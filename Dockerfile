@@ -17,7 +17,6 @@ COPY package*.json tsconfig.json ./
 
 # Bundle app source
 COPY ./src ./src
-# COPY ./migrations ./migrations
 
 RUN npm install && npm run compile && npm prune --production
 

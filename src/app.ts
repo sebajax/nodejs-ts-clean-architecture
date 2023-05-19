@@ -6,7 +6,7 @@ import helmet from 'helmet';
 import bodyParser from 'body-parser';
 import routes from './api/route/route';
 import logger from './infraestructure/log/logger';
-// import migrator from './infraestructure/database/migrator';
+import migrator from './infraestructure/database/migrator';
 import {VERSION_NUMBER} from './infraestructure/config/environment.config';
 
 const app: Application = express();
@@ -28,9 +28,9 @@ routes(app);
 
 (async () => {
   try {
-    // await migrator.up();
+    await migrator.up();
     app.listen(process.env.PORT, () => {
-      logger.info(`APP ${VERSION_NUMBER} running on PORT: ${process.env.PORT}`);
+      logger.info(`API ${VERSION_NUMBER} running on PORT: ${process.env.PORT}`);
     });
   } catch (error) {
     logger.error(`server error: ${error}`);

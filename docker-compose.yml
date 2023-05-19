@@ -13,3 +13,27 @@ services:
       - .env
     ports:
       - '${PORT}:${PORT}'
+    depends_on:
+      - db
+  db:
+    image: postgres:14.6-alpine
+    container_name: ${API_NAME}-db
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+    env_file:
+      - .env
+    ports:
+      - '${DB_PORT}:${DB_PORT}'
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      TZ: 'America/Santiago'
+    healthcheck:
+      test: [ 'CMD-SHELL', 'pg_isready -U ${DB_USER} -d ${DB_NAME}' ]
+      interval: 5s
+      timeout: 1s
+      retries: 5
+volumes:
+  pgdata:
+    name: nodejs-ts-abcdin-db
