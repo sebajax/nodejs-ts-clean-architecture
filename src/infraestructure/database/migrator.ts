@@ -3,7 +3,7 @@ import {Umzug, SequelizeStorage} from 'umzug';
 // db import
 import db from './db';
 // logger import
-import logger from '../log/logger';
+import {logger} from '../log/logger';
 
 const migrator = new Umzug({
   migrations: {glob: `${process.env.MIGRATION_DIR}`},

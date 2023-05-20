@@ -6,8 +6,6 @@ import {
   HealthEndpoint,
 } from '@cloudnative/health-connect';
 import {VERSION_NUMBER} from '../../infraestructure/config/environment.config';
-import checkBodyMiddleware from '../middleware/checkBody.middleware';
-import addMessageController from '../../controller';
 
 const router = express.Router();
 const healthCheck = new HealthChecker();
@@ -23,8 +21,5 @@ router.get('/status', (_req: Request, res: Response): Response => {
     `API => [${process.env.API_NAME} ${VERSION_NUMBER}] ENV => (${process.env.NODE_ENV}) STATUS => OK`
   );
 });
-
-// add a new message
-router.post('/messages', checkBodyMiddleware, addMessageController);
 
 export default router;
