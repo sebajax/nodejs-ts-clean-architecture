@@ -4,9 +4,10 @@ import {
   IResponseDomain,
 } from '../../../domain/response.domain';
 import Service from '../../service';
+import {IAddMessageService} from './addMessage.interface';
 import addMessageResponse from './addMessage.response';
 
-class AddMessageService extends Service {
+class AddMessageService extends Service implements IAddMessageService {
   private response: IAddMessageResponse;
 
   public constructor() {

@@ -4,15 +4,15 @@ import {ObjectSchema} from 'joi';
 import {StatusCodes} from 'http-status-codes';
 import {IResponseDomain} from '../../domain/response.domain';
 import Controller from '../controller';
-import AddMessageService from '../../service/message/addMessage/addMessage.service';
+import {IAddMessageService} from '../../service/message/addMessage/addMessage.interface';
 
 class AddMessageController extends Controller {
   private addMessageSchema: ObjectSchema;
-  private addMessageService: AddMessageService;
+  private addMessageService: IAddMessageService;
 
   public constructor(
     addMessageSchema: ObjectSchema,
-    addMessageService: AddMessageService
+    addMessageService: IAddMessageService
   ) {
     super();
     this.addMessageSchema = addMessageSchema;
