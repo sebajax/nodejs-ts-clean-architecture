@@ -2,7 +2,7 @@ import {StatusCodes} from 'http-status-codes';
 import {
   IResponseDomain,
   IAddMessageResponse,
-} from '../../domain/response.domain';
+} from '../../../domain/response.domain';
 
 /*
  * INTERNAL_SERVER_ERROR

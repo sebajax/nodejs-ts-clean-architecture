@@ -1,7 +1,7 @@
 // module import
 import {Sequelize} from 'sequelize';
 // logger import
-import logger from '../log/logger';
+import {logger} from '../log/logger';
 
 /**
  * create a connection to the database

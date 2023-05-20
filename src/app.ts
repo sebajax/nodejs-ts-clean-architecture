@@ -5,7 +5,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import bodyParser from 'body-parser';
 import routes from './api/route/route';
-import logger from './infraestructure/log/logger';
+import {logger} from './infraestructure/log/logger';
 import migrator from './infraestructure/database/migrator';
 import {VERSION_NUMBER} from './infraestructure/config/environment.config';
 

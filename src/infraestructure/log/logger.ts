@@ -34,7 +34,7 @@ const logMessage: ILogDomain = {
     controller: string,
     method: string,
     body: object
-  ) => {
+  ): string => {
     const message: IMessageDomain = {
       requestMethod,
       controller,
@@ -48,7 +48,7 @@ const logMessage: ILogDomain = {
     controller: string,
     statusCode: number,
     errorMessage: string
-  ) => {
+  ): string => {
     const message: IMessageDomain = {
       requestMethod,
       controller,
@@ -59,5 +59,4 @@ const logMessage: ILogDomain = {
   },
 };
 
-export default logger;
 export {logger, logMessage};
