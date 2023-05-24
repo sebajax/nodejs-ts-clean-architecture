@@ -1,8 +1,19 @@
 import Joi from 'joi';
 
+interface IMessageData {
+  text: string;
+  sender: string;
+  room: string;
+  messageTimestamp: Date;
+  classification: {
+    topScore: object;
+    details: Array<object>;
+  };
+}
+
 const addMessageSchema = Joi.object({
   text: Joi.string().min(1).required(),
-  userId: Joi.string().email({minDomainSegments: 2}).max(100).required(),
+  sender: Joi.string().email({minDomainSegments: 2}).max(100).required(),
   room: Joi.string().min(1).required(),
   messageTimestamp: Joi.date().required(),
   classification: Joi.object({
@@ -33,4 +44,4 @@ const getMessagesSchema = Joi.object({
   }),
 }).required();
 
-export {addMessageSchema, getMessagesSchema};
+export {IMessageData, addMessageSchema, getMessagesSchema};

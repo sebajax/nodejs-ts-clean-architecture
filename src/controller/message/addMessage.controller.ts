@@ -2,9 +2,10 @@
 import {Request, Response} from 'express';
 import {ObjectSchema} from 'joi';
 import {StatusCodes} from 'http-status-codes';
-import {IResponseDomain} from '../../domain/response.domain';
+import IResponseDomain from '../../domain/response.domain';
 import Controller from '../controller';
 import {IAddMessageService} from '../../service/message/addMessage/addMessage.interface';
+import {IMessageData} from '../../schema/message.schema';
 
 class AddMessageController extends Controller {
   private addMessageSchema: ObjectSchema;
@@ -49,7 +50,7 @@ class AddMessageController extends Controller {
 
       // call service
       const {error, message, code, data}: IResponseDomain =
-        await this.addMessageService.addMessage(body);
+        await this.addMessageService.addMessage(body as IMessageData);
 
       return res.status(code).send({error, message, data});
     } catch (error) {

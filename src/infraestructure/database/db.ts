@@ -1,11 +1,12 @@
 // module import
-import {Sequelize} from 'sequelize';
+import {Sequelize} from 'sequelize-typescript';
 // logger import
 import {logger} from '../log/logger';
 
 /**
  * create a connection to the database
  */
+
 const db = new Sequelize(
   `${process.env.DB_NAME}`,
   `${process.env.DB_USER}`,

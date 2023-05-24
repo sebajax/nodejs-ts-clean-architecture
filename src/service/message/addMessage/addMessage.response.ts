@@ -1,8 +1,6 @@
 import {StatusCodes} from 'http-status-codes';
-import {
-  IResponseDomain,
-  IAddMessageResponse,
-} from '../../../domain/response.domain';
+import IResponseDomain from '../../../domain/response.domain';
+import {IAddMessageResponse} from './addMessage.interface';
 
 /*
  * INTERNAL_SERVER_ERROR
