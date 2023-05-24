@@ -1,5 +1,7 @@
+// module import
 import {Optional} from 'sequelize';
-import MessageModel from './message.model';
+// model import
+import {MessageModel} from '../index';
 
 interface IMessageModel {
   messageId: number;

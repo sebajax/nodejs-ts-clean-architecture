@@ -1,9 +1,10 @@
+// module import
 import {Model, Table, Column, DataType} from 'sequelize-typescript';
+// interface import
 import {
   IMessageModel,
   MessageCreationAttributes,
 } from './message.model.interface';
-import db from '../infraestructure/database/db';
 
 @Table({
   tableName: 'message',
@@ -73,6 +74,7 @@ class MessageModel
   })
   updatedAt: Date;
 
+  // method for creating a new message into the databse
   public async createMessage(
     message: MessageCreationAttributes
   ): Promise<object> {
@@ -80,7 +82,5 @@ class MessageModel
     return messageCreate.save();
   }
 }
-
-db.addModels([MessageModel]);
 
 export default MessageModel;

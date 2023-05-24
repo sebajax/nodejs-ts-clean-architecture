@@ -1,15 +1,5 @@
+// module import
 import Joi from 'joi';
-
-interface IMessageData {
-  text: string;
-  sender: string;
-  room: string;
-  messageTimestamp: Date;
-  classification: {
-    topScore: object;
-    details: Array<object>;
-  };
-}
 
 const addMessageSchema = Joi.object({
   text: Joi.string().min(1).required(),
@@ -44,4 +34,4 @@ const getMessagesSchema = Joi.object({
   }),
 }).required();
 
-export {IMessageData, addMessageSchema, getMessagesSchema};
+export {addMessageSchema, getMessagesSchema};

@@ -1,5 +1,8 @@
+// domain import
 import IResponseDomain from '../../../domain/response.domain';
-import {messageModel} from '../../../model/message.model.interface';
+// model import
+import {messageModel} from '../../../model/message/message.model.interface';
+// service import
 import AddMessageService from './addMessage.service';
 
 // for addMessageService response domain
