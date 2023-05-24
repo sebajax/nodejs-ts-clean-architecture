@@ -1,6 +1,6 @@
 import express, {Request, Response} from 'express';
 import checkBodyMiddleware from '../middleware/checkBody.middleware';
-import {addMessageController} from '../../controller/message';
+import {addMessageController} from '../../controller/message/addMessage/addMessage.controller.interface';
 
 const router = express.Router();
 

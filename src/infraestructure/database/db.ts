@@ -1,5 +1,5 @@
 // module import
-import {Sequelize} from 'sequelize';
+import {Sequelize} from 'sequelize-typescript';
 // logger import
 import {logger} from '../log/logger';
 

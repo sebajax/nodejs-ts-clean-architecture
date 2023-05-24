@@ -1,11 +1,15 @@
+// module import
 import winston, {Logger} from 'winston';
+// domain import
+import {IMessageDomain, ILogDomain} from '../../domain/logger.domain';
+// infraestructure import
 import {
   VERSION_NUMBER,
   API_NAME,
   LOG_LEVEL,
 } from '../config/environment.config';
-import {IMessageDomain, ILogDomain} from '../../domain/logger.domain';
 
+// configuring winston format for logging
 const {colorize, combine, timestamp, json} = winston.format;
 
 /*

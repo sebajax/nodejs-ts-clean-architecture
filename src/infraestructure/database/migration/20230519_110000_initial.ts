@@ -1,7 +1,7 @@
 // module import
 import {DataTypes} from 'sequelize';
 // migration type import
-import {Migration} from '../database/migrator';
+import {Migration} from '../migrator';
 
 export const up: Migration = async ({
   context: queryInterface,
@@ -14,10 +14,6 @@ export const up: Migration = async ({
       primaryKey: true,
       autoIncrement: true,
     },
-    sender: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
-    },
     text: {
       type: DataTypes.TEXT,
       allowNull: false,
@@ -26,14 +22,9 @@ export const up: Migration = async ({
       type: DataTypes.JSONB,
       allowNull: false,
     },
-    status: {
-      type: DataTypes.STRING(45),
-      allowNull: false,
-    },
-    updatedBy: {
-      field: 'updated_by',
+    sender: {
       type: DataTypes.STRING(100),
-      allowNull: true,
+      allowNull: false,
     },
     messageTimestamp: {
       field: 'message_timestamp',

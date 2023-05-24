@@ -1,10 +1,14 @@
-// domain import
+// module import
 import {Request, Response} from 'express';
 import {ObjectSchema} from 'joi';
 import {StatusCodes} from 'http-status-codes';
-import {IResponseDomain} from '../../domain/response.domain';
-import Controller from '../controller';
-import {IAddMessageService} from '../../service/message/addMessage/addMessage.interface';
+// domain import
+import IResponseDomain from '../../../domain/response.domain';
+// controller main class import
+import Controller from '../../controller';
+// interface import
+import {IAddMessageService} from '../../../service/message/addMessage/addMessage.service.interface';
+import {IMessageData} from './addMessage.controller.interface';
 
 class AddMessageController extends Controller {
   private addMessageSchema: ObjectSchema;
@@ -23,16 +27,16 @@ class AddMessageController extends Controller {
     // get controller name for logging
     const controller = AddMessageController.name;
     const method = 'post';
-    // destructuring req info
-    const {body} = req;
+    // casting body to interface type
+    const messagaData = req.body as IMessageData;
     // log end point execution
     this.logger.info(
-      this.logMessage.init(req.url, method, req.method, controller, body)
+      this.logMessage.init(req.url, method, req.method, controller, messagaData)
     );
 
     try {
       // validate request with schema
-      const {error: errorRequest} = this.addMessageSchema.validate(body);
+      const {error: errorRequest} = this.addMessageSchema.validate(messagaData);
       if (errorRequest !== undefined) {
         this.logger.warn(
           this.logMessage.error(
@@ -49,7 +53,7 @@ class AddMessageController extends Controller {
 
       // call service
       const {error, message, code, data}: IResponseDomain =
-        await this.addMessageService.addMessage(body);
+        await this.addMessageService.addMessage(messagaData);
 
       return res.status(code).send({error, message, data});
     } catch (error) {

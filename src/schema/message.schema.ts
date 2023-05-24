@@ -1,8 +1,9 @@
+// module import
 import Joi from 'joi';
 
 const addMessageSchema = Joi.object({
   text: Joi.string().min(1).required(),
-  userId: Joi.string().email({minDomainSegments: 2}).max(100).required(),
+  sender: Joi.string().email({minDomainSegments: 2}).max(100).required(),
   room: Joi.string().min(1).required(),
   messageTimestamp: Joi.date().required(),
   classification: Joi.object({

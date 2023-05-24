@@ -1,8 +1,9 @@
+// module import
 import {StatusCodes} from 'http-status-codes';
-import {
-  IResponseDomain,
-  IAddMessageResponse,
-} from '../../../domain/response.domain';
+// domain import
+import IResponseDomain from '../../../domain/response.domain';
+// interface import
+import {IAddMessageResponse} from './addMessage.service.interface';
 
 /*
  * INTERNAL_SERVER_ERROR
