@@ -1,7 +1,3 @@
-# nodejs-ts-abcdin
-
-<br />
-
 ## Authors
 
 - Sebastián Ituarte [@sebajax](https://github.com/sebajax)
@@ -19,23 +15,17 @@
 
 ## This app uses conventional commits
 
----
-
 [Conventional commits url](https://www.conventionalcommits.org/en/v1.0.0/)
 
 <br />
 
 ## This api uses 3-layer hexagonal architecture (route - controller - service)
 
----
-
 ![alt text](./nodejs-ts-abcdin.png)
 
 <br />
 
 ## Example showed below in each step
-
----
 
 ![alt text](./example.png)
 
@@ -60,8 +50,6 @@
 <br />
 
 ## Route explained
-
----
 
 Routing refers to determining how an application responds to a client request to a particular endpoint, which is a URI (or path) and a specific HTTP request method (GET, POST, PUT, DELETE).
 
