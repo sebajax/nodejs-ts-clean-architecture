@@ -6,6 +6,15 @@ import IResponseDomain from '../../../domain/response.domain';
 import {IAddMessageResponse} from './addMessage.service.interface';
 
 /*
+ * NOT_FOUND
+ */
+const USER_NOT_FOUND: IResponseDomain = {
+  error: true,
+  message: 'USER_NOT_FOUND',
+  code: StatusCodes.NOT_FOUND,
+};
+
+/*
  * INTERNAL_SERVER_ERROR
  */
 const INSERT_MESSAGE_ERROR: IResponseDomain = {
@@ -25,10 +34,11 @@ const CREATED: IResponseDomain = {
 
 // response to export with definition
 const addMessageResponse: IAddMessageResponse = {
+  USER_NOT_FOUND,
   INSERT_MESSAGE_ERROR,
   CREATED,
 };
 
 export default addMessageResponse;
 
-export {INSERT_MESSAGE_ERROR, CREATED};
+export {USER_NOT_FOUND, INSERT_MESSAGE_ERROR, CREATED};

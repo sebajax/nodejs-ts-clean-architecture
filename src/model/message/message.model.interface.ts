@@ -5,7 +5,6 @@ import {MessageModel} from '../index';
 
 interface IMessageModel {
   messageId: number;
-  sender: string;
   text: string;
   details: object;
   messageTimestamp: Date;
@@ -13,6 +12,7 @@ interface IMessageModel {
   room: string;
   createdAt: Date;
   updatedAt: Date;
+  userId: number; // FK to user
   createMessage(data: object): Promise<object>;
 }
 

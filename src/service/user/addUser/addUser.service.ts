@@ -21,6 +21,13 @@ class AddUserService extends Service implements IAddUserService {
 
   public async addUser(userData: IUserData): Promise<IResponseDomain> {
     try {
+      // check that email does not exist
+      // check if is a valid user using user model
+      const checkUser = await this.userModel.getUser(userData.email);
+      if (checkUser !== null) {
+        return this.response.USER_EXISTS;
+      }
+
       // map user data to user model data
       const user = {
         name: userData.name,

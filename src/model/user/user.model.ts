@@ -6,21 +6,20 @@ import {IUserModel, UserCreationAttributes} from './user.model.interface';
 import MessageModel from '../message/message.model';
 
 @Table({
-  tableName: 'message',
+  tableName: 'user',
   timestamps: true,
 })
 class UserModel
   extends Model<IUserModel, UserCreationAttributes>
   implements IUserModel
 {
-  userId: number;
   @Column({
     type: DataType.INTEGER,
     primaryKey: true,
     autoIncrement: true,
     field: 'user_id',
   })
-  user_id: number;
+  userId: number;
 
   @Column({
     type: DataType.STRING,
@@ -49,12 +48,21 @@ class UserModel
   updatedAt: Date;
 
   @HasMany(() => MessageModel)
-  players: MessageModel[];
+  messages: MessageModel[];
 
   // method for creating a new user into the databse
   public async createUser(user: UserCreationAttributes): Promise<object> {
     const userCreate = new UserModel(user);
     return userCreate.save();
+  }
+
+  // method to get the user data by the email
+  public async getUser(email: string): Promise<{userId: number} | null> {
+    return UserModel.findOne({
+      where: {
+        email,
+      },
+    });
   }
 }
 

@@ -6,11 +6,20 @@ import IResponseDomain from '../../../domain/response.domain';
 import {IAddUserResponse} from './addUser.service.interface';
 
 /*
+ * BAD_REQUEST
+ */
+const USER_EXISTS: IResponseDomain = {
+  error: true,
+  message: 'USER_EXISTS',
+  code: StatusCodes.BAD_REQUEST,
+};
+
+/*
  * INTERNAL_SERVER_ERROR
  */
 const INSERT_USER_ERROR: IResponseDomain = {
   error: true,
-  message: 'INSERT_MESSAGE_ERROR',
+  message: 'INSERT_USER_ERROR',
   code: StatusCodes.INTERNAL_SERVER_ERROR,
 };
 
@@ -19,16 +28,17 @@ const INSERT_USER_ERROR: IResponseDomain = {
  */
 const CREATED: IResponseDomain = {
   error: false,
-  message: 'MESSAGE_CREATED',
+  message: 'USER_CREATED',
   code: StatusCodes.CREATED,
 };
 
 // response to export with definition
 const addUserResponse: IAddUserResponse = {
+  USER_EXISTS,
   INSERT_USER_ERROR,
   CREATED,
 };
 
 export default addUserResponse;
 
-export {INSERT_USER_ERROR, CREATED};
+export {USER_EXISTS, INSERT_USER_ERROR, CREATED};

@@ -40,12 +40,27 @@
 | `name`    | `string` | **Required**. User name to be created |
 | `email`   | `string` | **Required**. Email to be created     |
 
-```json
+````json
+Request
 {
   "name": "Jonh Doo",
   "email": "jonh.doo@example.com"
 }
-```
+
+```json
+Response
+{
+    "error": false,
+    "message": "USER_CREATED",
+    "data": {
+        "userId": 1,
+        "name": "John Doo",
+        "email": "example@example.com",
+        "updatedAt": "2023-05-25T22:13:07.013Z",
+        "createdAt": "2023-05-25T22:13:07.013Z"
+    }
+}
+````
 
 <br />
 
@@ -127,11 +142,20 @@ import IResponseDomain from '../../../domain/response.domain';
 import {IAddUserResponse} from './addUser.service.interface';
 
 /*
+ * BAD_REQUEST
+ */
+const USER_EXISTS: IResponseDomain = {
+  error: true,
+  message: 'USER_EXISTS',
+  code: StatusCodes.BAD_REQUEST,
+};
+
+/*
  * INTERNAL_SERVER_ERROR
  */
 const INSERT_USER_ERROR: IResponseDomain = {
   error: true,
-  message: 'INSERT_MESSAGE_ERROR',
+  message: 'INSERT_USER_ERROR',
   code: StatusCodes.INTERNAL_SERVER_ERROR,
 };
 
@@ -140,19 +164,20 @@ const INSERT_USER_ERROR: IResponseDomain = {
  */
 const CREATED: IResponseDomain = {
   error: false,
-  message: 'MESSAGE_CREATED',
+  message: 'USER_CREATED',
   code: StatusCodes.CREATED,
 };
 
 // response to export with definition
 const addUserResponse: IAddUserResponse = {
+  USER_EXISTS,
   INSERT_USER_ERROR,
   CREATED,
 };
 
 export default addUserResponse;
 
-export {INSERT_USER_ERROR, CREATED};
+export {USER_EXISTS, INSERT_USER_ERROR, CREATED};
 ```
 
 Observations
@@ -165,6 +190,7 @@ Observations
 ```typescript
 // for addMessageService response domain
 interface IAddUserResponse {
+  USER_EXISTS: IResponseDomain;
   INSERT_USER_ERROR: IResponseDomain;
   CREATED: IResponseDomain;
 }
@@ -178,6 +204,7 @@ addUser.service.interface.ts
 
 ```typescript
 // domain import
+import {IUserData} from '../../../controller/user/addUser/addUser.controller.interface';
 import IResponseDomain from '../../../domain/response.domain';
 // model import
 import {userModel} from '../../../model/user/user.model.interface';
@@ -186,13 +213,14 @@ import AddUserService from './addUser.service';
 
 // for addMessageService response domain
 interface IAddUserResponse {
+  USER_EXISTS: IResponseDomain;
   INSERT_USER_ERROR: IResponseDomain;
   CREATED: IResponseDomain;
 }
 
 // interface to implement the service
 interface IAddUserService {
-  addUser(data: object): Promise<IResponseDomain>;
+  addUser(userData: IUserData): Promise<IResponseDomain>;
 }
 
 /*
@@ -356,21 +384,20 @@ import {IUserModel, UserCreationAttributes} from './user.model.interface';
 import MessageModel from '../message/message.model';
 
 @Table({
-  tableName: 'message',
+  tableName: 'user',
   timestamps: true,
 })
 class UserModel
   extends Model<IUserModel, UserCreationAttributes>
   implements IUserModel
 {
-  userId: number;
   @Column({
     type: DataType.INTEGER,
     primaryKey: true,
     autoIncrement: true,
     field: 'user_id',
   })
-  user_id: number;
+  userId: number;
 
   @Column({
     type: DataType.STRING,
@@ -399,7 +426,7 @@ class UserModel
   updatedAt: Date;
 
   @HasMany(() => MessageModel)
-  players: MessageModel[];
+  messages: MessageModel[];
 
   // method for creating a new user into the databse
   public async createUser(user: UserCreationAttributes): Promise<object> {

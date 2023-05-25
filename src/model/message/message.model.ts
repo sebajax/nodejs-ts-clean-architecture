@@ -72,10 +72,11 @@ class MessageModel
 
   @ForeignKey(() => UserModel)
   @Column({
-    type: DataType.STRING,
+    type: DataType.INTEGER,
     allowNull: false,
+    field: 'user_id',
   })
-  sender: string;
+  userId: number;
 
   // method for creating a new message into the databse
   public async createMessage(

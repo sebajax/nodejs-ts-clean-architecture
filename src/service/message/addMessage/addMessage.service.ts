@@ -7,6 +7,7 @@ import {
   IAddMessageResponse,
   IAddMessageService,
 } from './addMessage.service.interface';
+import {IUserModel} from '../../../model/user/user.model.interface';
 // service main class import
 import Service from '../../service';
 // response import
@@ -15,19 +16,27 @@ import addMessageResponse from './addMessage.response';
 class AddMessageService extends Service implements IAddMessageService {
   private response: IAddMessageResponse;
   private messageModel: IMessageModel;
+  private userModel: IUserModel;
 
-  public constructor(messageModel: IMessageModel) {
+  public constructor(messageModel: IMessageModel, userModel: IUserModel) {
     super();
     this.response = addMessageResponse;
     this.messageModel = messageModel;
+    this.userModel = userModel;
   }
 
   public async addMessage(messagaData: IMessageData): Promise<IResponseDomain> {
     try {
+      // check if is a valid user using user model
+      const user = await this.userModel.getUser(messagaData.sender);
+      if (user === null) {
+        return this.response.USER_NOT_FOUND;
+      }
+
       // map message data to message model data
       const message = {
         text: messagaData.text,
-        sender: messagaData.sender,
+        userId: user.userId,
         details: messagaData.classification.details,
         messageTimestamp: messagaData.messageTimestamp,
         topScore: messagaData.classification.topScore,

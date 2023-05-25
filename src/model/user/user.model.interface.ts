@@ -10,6 +10,7 @@ interface IUserModel {
   createdAt: Date;
   updatedAt: Date;
   createUser(data: object): Promise<object>;
+  getUser(email: string): Promise<{userId: number} | null>;
 }
 
 type UserCreationAttributes = Optional<IUserModel, 'userId'>;
