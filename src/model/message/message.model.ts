@@ -1,10 +1,12 @@
 // module import
-import {Model, Table, Column, DataType} from 'sequelize-typescript';
+import {Model, Table, Column, DataType, ForeignKey} from 'sequelize-typescript';
 // interface import
 import {
   IMessageModel,
   MessageCreationAttributes,
 } from './message.model.interface';
+// model import
+import UserModel from '../user/user.model';
 
 @Table({
   tableName: 'message',
@@ -21,12 +23,6 @@ class MessageModel
     field: 'message_id',
   })
   messageId: number;
-
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  sender: string;
 
   @Column({
     type: DataType.TEXT,
@@ -73,6 +69,13 @@ class MessageModel
     field: 'updated_at',
   })
   updatedAt: Date;
+
+  @ForeignKey(() => UserModel)
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  sender: string;
 
   // method for creating a new message into the databse
   public async createMessage(

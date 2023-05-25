@@ -22,10 +22,6 @@ export const up: Migration = async ({
       type: DataTypes.JSONB,
       allowNull: false,
     },
-    sender: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
-    },
     messageTimestamp: {
       field: 'message_timestamp',
       type: DataTypes.DATE,
@@ -38,6 +34,40 @@ export const up: Migration = async ({
     },
     room: {
       type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    createdAt: {
+      field: 'created_at',
+      type: DataTypes.DATE,
+    },
+    updatedAt: {
+      field: 'updated_at',
+      type: DataTypes.DATE,
+    },
+    sender: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      references: {
+        model: 'user',
+        key: 'user_id',
+      },
+    },
+  });
+
+  await queryInterface.createTable('user', {
+    userId: {
+      field: 'user_id',
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    name: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING(100),
       allowNull: false,
     },
     createdAt: {
@@ -81,5 +111,6 @@ export const down: Migration = async ({
   /*
   --- remove tables ---
   */
+  await queryInterface.dropTable('user');
   await queryInterface.dropTable('message');
 };
