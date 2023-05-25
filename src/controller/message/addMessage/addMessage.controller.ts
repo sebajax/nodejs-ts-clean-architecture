@@ -11,15 +11,13 @@ import {IAddMessageService} from '../../../service/message/addMessage/addMessage
 import {IMessageData} from './addMessage.controller.interface';
 
 class AddMessageController extends Controller {
-  private addMessageSchema: ObjectSchema;
   private addMessageService: IAddMessageService;
 
   public constructor(
     addMessageSchema: ObjectSchema,
     addMessageService: IAddMessageService
   ) {
-    super();
-    this.addMessageSchema = addMessageSchema;
+    super(addMessageSchema);
     this.addMessageService = addMessageService;
   }
 
@@ -28,32 +26,24 @@ class AddMessageController extends Controller {
     const controller = AddMessageController.name;
     const method = 'post';
     // casting body to interface type
-    const messagaData = req.body as IMessageData;
+    const body = req.body as IMessageData;
     // log end point execution
     this.logger.info(
-      this.logMessage.init(req.url, method, req.method, controller, messagaData)
+      this.logMessage.init(req.url, method, req.method, controller, body)
     );
 
     try {
       // validate request with schema
-      const {error: errorRequest} = this.addMessageSchema.validate(messagaData);
-      if (errorRequest !== undefined) {
-        this.logger.warn(
-          this.logMessage.error(
-            req.method,
-            controller,
-            StatusCodes.BAD_REQUEST,
-            errorRequest.details[0].message
-          )
-        );
+      const errorRequest = this.schemaValidation(body, controller, method);
+      if (errorRequest !== null) {
         return res
           .status(StatusCodes.BAD_REQUEST)
-          .send({error: true, message: errorRequest.details[0].message});
+          .send({error: true, message: errorRequest});
       }
 
       // call service
       const {error, message, code, data}: IResponseDomain =
-        await this.addMessageService.addMessage(messagaData);
+        await this.addMessageService.addMessage(body);
 
       return res.status(code).send({error, message, data});
     } catch (error) {

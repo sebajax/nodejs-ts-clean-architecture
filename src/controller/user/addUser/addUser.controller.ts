@@ -11,15 +11,13 @@ import {IAddUserService} from '../../../service/user/addUser/addUser.service.int
 import {IUserData} from './addUser.controller.interface';
 
 class AddUserController extends Controller {
-  private addUserSchema: ObjectSchema;
   private addUserService: IAddUserService;
 
   public constructor(
     addUserSchema: ObjectSchema,
     addUserService: IAddUserService
   ) {
-    super();
-    this.addUserSchema = addUserSchema;
+    super(addUserSchema);
     this.addUserService = addUserService;
   }
 
@@ -28,32 +26,24 @@ class AddUserController extends Controller {
     const controller = AddUserController.name;
     const method = 'post';
     // casting body to interface type
-    const userData = req.body as IUserData;
+    const body = req.body as IUserData;
     // log end point execution
     this.logger.info(
-      this.logMessage.init(req.url, method, req.method, controller, userData)
+      this.logMessage.init(req.url, method, req.method, controller, body)
     );
 
     try {
       // validate request with schema
-      const {error: errorRequest} = this.addUserSchema.validate(userData);
-      if (errorRequest !== undefined) {
-        this.logger.warn(
-          this.logMessage.error(
-            req.method,
-            controller,
-            StatusCodes.BAD_REQUEST,
-            errorRequest.details[0].message
-          )
-        );
+      const errorRequest = this.schemaValidation(body, controller, method);
+      if (errorRequest !== null) {
         return res
           .status(StatusCodes.BAD_REQUEST)
-          .send({error: true, message: errorRequest.details[0].message});
+          .send({error: true, message: errorRequest});
       }
 
       // call service
       const {error, message, code, data}: IResponseDomain =
-        await this.addUserService.addUser(userData);
+        await this.addUserService.addUser(body);
 
       return res.status(code).send({error, message, data});
     } catch (error) {
