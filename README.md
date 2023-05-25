@@ -40,14 +40,13 @@
 | `name`    | `string` | **Required**. User name to be created |
 | `email`   | `string` | **Required**. Email to be created     |
 
-````json
+```json
 Request
 {
   "name": "Jonh Doo",
   "email": "jonh.doo@example.com"
 }
 
-```json
 Response
 {
     "error": false,
@@ -60,7 +59,7 @@ Response
         "createdAt": "2023-05-25T22:13:07.013Z"
     }
 }
-````
+```
 
 <br />
 
