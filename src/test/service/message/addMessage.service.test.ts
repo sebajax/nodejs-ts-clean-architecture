@@ -54,7 +54,7 @@ describe('#AddMessageService()', () => {
   } as IMessageData;
 
   it('It should pass and return that the message was created successfully CREATED', async () => {
-    // mock message response
+    // mock create message response
     const messageId = 1;
     const userId = 10;
 
