@@ -14,6 +14,10 @@ interface IMessageModel {
   updatedAt: Date;
   userId: number; // FK to user
   createMessage(data: object): Promise<object>;
+  getMessages(
+    limit: number,
+    offset: number
+  ): Promise<{count: number; rows: Array<object>}>;
 }
 
 type MessageCreationAttributes = Optional<IMessageModel, 'messageId'>;

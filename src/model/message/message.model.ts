@@ -1,5 +1,12 @@
 // module import
-import {Model, Table, Column, DataType, ForeignKey} from 'sequelize-typescript';
+import {
+  Model,
+  Table,
+  Column,
+  DataType,
+  ForeignKey,
+  BelongsTo,
+} from 'sequelize-typescript';
 // interface import
 import {
   IMessageModel,
@@ -78,12 +85,36 @@ class MessageModel
   })
   userId: number;
 
+  @BelongsTo(() => UserModel)
+  user: UserModel;
+
   // method for creating a new message into the databse
   public async createMessage(
     message: MessageCreationAttributes
   ): Promise<object> {
     const messageCreate = new MessageModel(message);
     return messageCreate.save();
+  }
+
+  // method for getting all the messages with pagination
+  public async getMessages(
+    limit: number,
+    offset: number
+  ): Promise<{count: number; rows: Array<object>}> {
+    const messages = await MessageModel.findAndCountAll({
+      include: {
+        model: UserModel,
+        attributes: ['name', 'email'],
+        required: true,
+      },
+      limit,
+      offset,
+    });
+
+    return {
+      count: messages.count,
+      rows: messages.rows as Array<object>,
+    };
   }
 }
 
