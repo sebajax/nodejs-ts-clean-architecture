@@ -1,7 +1,6 @@
 ## Authors
 
 - Sebastián Ituarte [@sebajax](https://github.com/sebajax)
-- Francisco Gallucci [@fjaviergallucci](https://github.com/fjaviergallucci)
 
 <br />
 
