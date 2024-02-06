@@ -672,7 +672,7 @@ export default db;
 ## Docker usage
 
     Build server
-        docker-compose -p nodejs-ts-abcdin build
+        docker-compose -p nodejs-ts-clean-architecture build
 
     Start server
         docker-compose up -d
