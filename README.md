@@ -20,7 +20,7 @@
 
 ## This api uses 3-layer hexagonal architecture (route - controller - service)
 
-![alt text](./nodejs-ts-abcdin.png)
+![alt text](./nodejs-ts-clean-architecture.png)
 
 <br />
 
