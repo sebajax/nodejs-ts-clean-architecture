@@ -1,7 +1,7 @@
 // domain import
 import IResponseDomain from '../../../domain/response.domain';
 // interface import
-import {IMessageModel} from '../../../model/message/message.model.interface';
+import { IMessageModel } from '../../../model/message/message.model.interface';
 import {
   IGetMessagesResponse,
   IGetMessagesService,
@@ -34,8 +34,8 @@ class GetMessagesService extends Service implements IGetMessagesService {
       );
 
       // get pagination info
-      const {count, rows} = getMessages;
-      const {total, current} = PaginationUtil.getPaginationData(count, page);
+      const { count, rows } = getMessages;
+      const { total, current } = PaginationUtil.getPaginationData(count, page);
 
       // if all the process was succuessfully we return an OK status
       return {

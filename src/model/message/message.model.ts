@@ -21,7 +21,8 @@ import UserModel from '../user/user.model';
 })
 class MessageModel
   extends Model<IMessageModel, MessageCreationAttributes>
-  implements IMessageModel {
+  implements IMessageModel
+{
   @Column({
     type: DataType.INTEGER,
     primaryKey: true,

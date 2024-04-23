@@ -1,7 +1,7 @@
 // domain import
 import IResponseDomain from '../../../domain/response.domain';
 // model import
-import {messageModel} from '../../../model/message/message.model.interface';
+import { messageModel } from '../../../model/message/message.model.interface';
 // service import
 import GetMessagesService from './getMessages.service';
 
@@ -23,4 +23,4 @@ const getMessagesService: IGetMessagesService = new GetMessagesService(
   messageModel
 );
 
-export {IGetMessagesResponse, IGetMessagesService, getMessagesService};
+export { getMessagesService, IGetMessagesResponse, IGetMessagesService };

@@ -1,6 +1,6 @@
-import {StatusCodes, ReasonPhrases} from 'http-status-codes';
-import {logMessage, logger} from '../../infraestructure/log/logger';
-import {NextFunction, Request, Response} from 'express';
+import { NextFunction, Request, Response } from 'express';
+import { ReasonPhrases, StatusCodes } from 'http-status-codes';
+import { logMessage, logger } from '../../infraestructure/log/logger';
 
 export default (req: Request, res: Response, next: NextFunction) => {
   if (Object.keys(req.body).length > 0) {
@@ -16,5 +16,5 @@ export default (req: Request, res: Response, next: NextFunction) => {
   );
   return res
     .status(StatusCodes.BAD_REQUEST)
-    .send({error: true, message: ReasonPhrases.BAD_REQUEST});
+    .send({ error: true, message: ReasonPhrases.BAD_REQUEST });
 };

@@ -1,8 +1,8 @@
 // domain import
-import {IUserData} from '../../../controller/user/addUser/addUser.controller.interface';
+import { IUserData } from '../../../controller/user/addUser/addUser.controller.interface';
 import IResponseDomain from '../../../domain/response.domain';
 // model import
-import {userModel} from '../../../model/user/user.model.interface';
+import { userModel } from '../../../model/user/user.model.interface';
 // service import
 import AddUserService from './addUser.service';
 
@@ -23,4 +23,4 @@ interface IAddUserService {
  */
 const addUserService: IAddUserService = new AddUserService(userModel);
 
-export {IAddUserResponse, IAddUserService, addUserService};
+export { addUserService, IAddUserResponse, IAddUserService };

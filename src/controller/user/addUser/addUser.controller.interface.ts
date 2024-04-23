@@ -1,9 +1,9 @@
 // controller import
 import AddUserController from '../addUser/addUser.controller';
 // schema import
-import {addUserSchema} from '../../../schema/user.schema';
+import { addUserSchema } from '../../../schema/user.schema';
 // interface import
-import {addUserService} from '../../../service/user/addUser/addUser.service.interface';
+import { addUserService } from '../../../service/user/addUser/addUser.service.interface';
 
 /*
  * body request data interface
@@ -21,4 +21,4 @@ const addUserController: AddUserController = new AddUserController(
   addUserService
 );
 
-export {IUserData, addUserController};
+export { addUserController, IUserData };

@@ -1,9 +1,9 @@
 // domain import
 import IResponseDomain from '../../../domain/response.domain';
 // interface import
-import {IUserModel} from '../../../model/user/user.model.interface';
-import {IUserData} from '../../../controller/user/addUser/addUser.controller.interface';
-import {IAddUserResponse, IAddUserService} from './addUser.service.interface';
+import { IUserData } from '../../../controller/user/addUser/addUser.controller.interface';
+import { IUserModel } from '../../../model/user/user.model.interface';
+import { IAddUserResponse, IAddUserService } from './addUser.service.interface';
 // service main class import
 import Service from '../../service';
 // response import

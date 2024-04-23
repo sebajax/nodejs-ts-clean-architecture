@@ -1,5 +1,5 @@
 // module imports
-import crypto, {BinaryToTextEncoding} from 'crypto';
+import crypto, { BinaryToTextEncoding } from 'crypto';
 
 class CryptoUtil {
   public static verifyHmac(hmac: string, hash: string): boolean {

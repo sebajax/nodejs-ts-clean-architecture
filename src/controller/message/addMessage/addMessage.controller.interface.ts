@@ -1,9 +1,9 @@
 // controller import
 import AddMessageController from '../addMessage/addMessage.controller';
 // schema import
-import {addMessageSchema} from '../../../schema/message.schema';
+import { addMessageSchema } from '../../../schema/message.schema';
 // interface import
-import {addMessageService} from '../../../service/message/addMessage/addMessage.service.interface';
+import { addMessageService } from '../../../service/message/addMessage/addMessage.service.interface';
 
 /*
  * body request data interface
@@ -27,4 +27,4 @@ const addMessageController: AddMessageController = new AddMessageController(
   addMessageService
 );
 
-export {IMessageData, addMessageController};
+export { addMessageController, IMessageData };

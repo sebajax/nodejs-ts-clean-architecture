@@ -1,9 +1,9 @@
 // module import
-import {StatusCodes} from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 // domain import
 import IResponseDomain from '../../../domain/response.domain';
 // interface import
-import {IGetMessagesResponse} from './getMessages.service.interface';
+import { IGetMessagesResponse } from './getMessages.service.interface';
 
 /*
  * INTERNAL_SERVER_ERROR
@@ -31,4 +31,4 @@ const addMessageResponse: IGetMessagesResponse = {
 
 export default addMessageResponse;
 
-export {GET_MESSAGES_ERROR, OK};
+export { GET_MESSAGES_ERROR, OK };

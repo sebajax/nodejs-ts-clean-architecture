@@ -1,9 +1,9 @@
 // module import
-import {StatusCodes} from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 // domain import
 import IResponseDomain from '../../../domain/response.domain';
 // interface import
-import {IAddUserResponse} from './addUser.service.interface';
+import { IAddUserResponse } from './addUser.service.interface';
 
 /*
  * BAD_REQUEST
@@ -41,4 +41,4 @@ const addUserResponse: IAddUserResponse = {
 
 export default addUserResponse;
 
-export {USER_EXISTS, INSERT_USER_ERROR, CREATED};
+export { CREATED, INSERT_USER_ERROR, USER_EXISTS };

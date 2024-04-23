@@ -1,16 +1,16 @@
 // module import
-import sinon from 'sinon';
-import {afterEach} from 'mocha';
 import chai from 'chai';
+import { afterEach } from 'mocha';
+import sinon from 'sinon';
 // response import
 import {
   CREATED,
-  USER_NOT_FOUND,
   INSERT_MESSAGE_ERROR,
+  USER_NOT_FOUND,
 } from '../../../service/message/addMessage/addMessage.response';
 // interface import
-import {IAddMessageService} from '../../../service/message/addMessage/addMessage.service.interface';
-import {IMessageData} from '../../../controller/message/addMessage/addMessage.controller.interface';
+import { IMessageData } from '../../../controller/message/addMessage/addMessage.controller.interface';
+import { IAddMessageService } from '../../../service/message/addMessage/addMessage.service.interface';
 // service import
 import AddMessageService from '../../../service/message/addMessage/addMessage.service';
 // model import
@@ -60,10 +60,10 @@ describe('#AddMessageService()', () => {
 
     // create a stub instance for models
     const messageModel = sinon.createStubInstance(MessageModel, {
-      createMessage: Promise.resolve({messageId}),
+      createMessage: Promise.resolve({ messageId }),
     });
     const userModel = sinon.createStubInstance(UserModel, {
-      getUser: Promise.resolve({userId}),
+      getUser: Promise.resolve({ userId }),
     });
 
     // instance AddMessageService class

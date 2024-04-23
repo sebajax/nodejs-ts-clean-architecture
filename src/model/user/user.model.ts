@@ -1,7 +1,7 @@
 // module import
-import {Model, Table, Column, DataType, HasMany} from 'sequelize-typescript';
+import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
 // interface import
-import {IUserModel, UserCreationAttributes} from './user.model.interface';
+import { IUserModel, UserCreationAttributes } from './user.model.interface';
 // model import
 import MessageModel from '../message/message.model';
 
@@ -57,7 +57,7 @@ class UserModel
   }
 
   // method to get the user data by the email
-  public async getUser(email: string): Promise<{userId: number} | null> {
+  public async getUser(email: string): Promise<{ userId: number } | null> {
     return UserModel.findOne({
       where: {
         email,

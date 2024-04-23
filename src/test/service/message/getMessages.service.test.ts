@@ -1,11 +1,11 @@
 // module import
-import sinon from 'sinon';
-import {afterEach} from 'mocha';
 import chai from 'chai';
+import { afterEach } from 'mocha';
+import sinon from 'sinon';
 // response import
-import {OK} from '../../../service/message/getMessages/getMessages.response';
+import { OK } from '../../../service/message/getMessages/getMessages.response';
 // interface import
-import {IGetMessagesService} from '../../../service/message/getMessages/getMessages.service.interface';
+import { IGetMessagesService } from '../../../service/message/getMessages/getMessages.service.interface';
 // service import
 import GetMessagesService from '../../../service/message/getMessages/getMessages.service';
 // model import

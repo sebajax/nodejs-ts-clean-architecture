@@ -1,11 +1,11 @@
 // module import
-import {Logger} from 'winston';
+import { Logger } from 'winston';
 // domain import
-import {ILogDomain} from '../domain/logger.domain';
+import { ILogDomain } from '../domain/logger.domain';
 // infraestructure import
-import {logMessage, logger} from '../infraestructure/log/logger';
-import {ObjectSchema} from 'joi';
-import {StatusCodes} from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
+import { ObjectSchema } from 'joi';
+import { logMessage, logger } from '../infraestructure/log/logger';
 
 /*
  * controller main class import all the controllers must extend this class
@@ -27,7 +27,7 @@ abstract class Controller {
     method: string
   ): string | null {
     if (this.schema !== undefined) {
-      const {error} = this.schema.validate(body);
+      const { error } = this.schema.validate(body);
       if (error !== undefined) {
         this.logger.warn(
           this.logMessage.error(

@@ -1,16 +1,16 @@
 // module import
-import winston, {Logger} from 'winston';
+import winston, { Logger } from 'winston';
 // domain import
-import {IMessageDomain, ILogDomain} from '../../domain/logger.domain';
+import { ILogDomain, IMessageDomain } from '../../domain/logger.domain';
 // infraestructure import
 import {
-  VERSION_NUMBER,
   API_NAME,
   LOG_LEVEL,
+  VERSION_NUMBER,
 } from '../config/environment.config';
 
 // configuring winston format for logging
-const {colorize, combine, timestamp, json} = winston.format;
+const { colorize, combine, timestamp, json } = winston.format;
 
 /*
  * create a winston logger that streams to stackdriver logging
@@ -18,11 +18,11 @@ const {colorize, combine, timestamp, json} = winston.format;
  */
 const logger: Logger = winston.createLogger({
   level: LOG_LEVEL,
-  defaultMeta: {service: `[${API_NAME}]`, version: `${VERSION_NUMBER}`},
+  defaultMeta: { service: `[${API_NAME}]`, version: `${VERSION_NUMBER}` },
   format: combine(
-    timestamp({format: 'YYYY-MM-DD HH:mm:ss'}),
+    timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
     json(),
-    colorize({all: true})
+    colorize({ all: true })
   ),
   transports: [
     new winston.transports.Console({
@@ -63,4 +63,4 @@ const logMessage: ILogDomain = {
   },
 };
 
-export {logger, logMessage};
+export { logger, logMessage };
