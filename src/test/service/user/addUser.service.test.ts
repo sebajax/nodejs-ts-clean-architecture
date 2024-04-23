@@ -1,16 +1,16 @@
 // module import
-import sinon from 'sinon';
-import {afterEach} from 'mocha';
 import chai from 'chai';
+import { afterEach } from 'mocha';
+import sinon from 'sinon';
 // response import
 import {
   CREATED,
-  USER_EXISTS,
   INSERT_USER_ERROR,
+  USER_EXISTS,
 } from '../../../service/user/addUser/addUser.response';
 // interface import
-import {IAddUserService} from '../../../service/user/addUser/addUser.service.interface';
-import {IUserData} from '../../../controller/user/addUser/addUser.controller.interface';
+import { IUserData } from '../../../controller/user/addUser/addUser.controller.interface';
+import { IAddUserService } from '../../../service/user/addUser/addUser.service.interface';
 // service import
 import AddUserService from '../../../service/user/addUser/addUser.service';
 // model import
@@ -38,7 +38,7 @@ describe('#AddUserService()', () => {
     // create a stub instance for models
     const userModel = sinon.createStubInstance(UserModel, {
       getUser: Promise.resolve(null),
-      createUser: Promise.resolve({userId}),
+      createUser: Promise.resolve({ userId }),
     });
 
     // instance AddUserService class
@@ -75,7 +75,7 @@ describe('#AddUserService()', () => {
 
     // create a stub instance for models
     const userModel = sinon.createStubInstance(UserModel, {
-      getUser: Promise.resolve({userId}),
+      getUser: Promise.resolve({ userId }),
     });
 
     // instance AddUserService class

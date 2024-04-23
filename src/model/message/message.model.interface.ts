@@ -1,7 +1,7 @@
 // module import
-import {Optional} from 'sequelize';
+import { Optional } from 'sequelize';
 // model import
-import {MessageModel} from '../index';
+import { MessageModel } from '../index';
 
 interface IMessageModel {
   messageId: number;
@@ -17,7 +17,7 @@ interface IMessageModel {
   getMessages(
     limit: number,
     offset: number
-  ): Promise<{count: number; rows: Array<object>}>;
+  ): Promise<{ count: number; rows: Array<object> }>;
 }
 
 type MessageCreationAttributes = Optional<IMessageModel, 'messageId'>;
@@ -27,4 +27,4 @@ type MessageCreationAttributes = Optional<IMessageModel, 'messageId'>;
  */
 const messageModel: IMessageModel = new MessageModel();
 
-export {IMessageModel, MessageCreationAttributes, messageModel};
+export { IMessageModel, MessageCreationAttributes, messageModel };

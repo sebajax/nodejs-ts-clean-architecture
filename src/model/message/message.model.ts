@@ -1,11 +1,11 @@
 // module import
 import {
-  Model,
-  Table,
+  BelongsTo,
   Column,
   DataType,
   ForeignKey,
-  BelongsTo,
+  Model,
+  Table,
 } from 'sequelize-typescript';
 // interface import
 import {
@@ -21,8 +21,7 @@ import UserModel from '../user/user.model';
 })
 class MessageModel
   extends Model<IMessageModel, MessageCreationAttributes>
-  implements IMessageModel
-{
+  implements IMessageModel {
   @Column({
     type: DataType.INTEGER,
     primaryKey: true,
@@ -100,7 +99,7 @@ class MessageModel
   public async getMessages(
     limit: number,
     offset: number
-  ): Promise<{count: number; rows: Array<object>}> {
+  ): Promise<{ count: number; rows: Array<object> }> {
     const messages = await MessageModel.findAndCountAll({
       include: {
         model: UserModel,
