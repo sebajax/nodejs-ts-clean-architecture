@@ -11,7 +11,7 @@ class PaginationUtil {
   public static getPaginationData(
     count: number,
     page: number
-  ): {total: number; current: number} {
+  ): { total: number; current: number } {
     return {
       current: page <= 0 ? 1 : page,
       total: Math.ceil(count / this.limit),

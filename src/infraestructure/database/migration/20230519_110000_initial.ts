@@ -1,7 +1,7 @@
 // module import
-import {DataTypes} from 'sequelize';
+import { DataTypes } from 'sequelize';
 // migration type import
-import {Migration} from '../migrator';
+import { Migration } from '../migrator';
 
 export const up: Migration = async ({
   context: queryInterface,

@@ -7,4 +7,4 @@ import UserModel from './user/user.model';
 // map models to db session
 db.addModels([UserModel, MessageModel]);
 
-export {UserModel, MessageModel};
+export { MessageModel, UserModel };

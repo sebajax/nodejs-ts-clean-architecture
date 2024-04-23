@@ -12,4 +12,4 @@ interface IMessageDomain {
   errorMessage?: string;
 }
 
-export {ILogDomain, IMessageDomain};
+export { ILogDomain, IMessageDomain };

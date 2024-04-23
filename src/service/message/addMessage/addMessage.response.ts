@@ -1,9 +1,9 @@
 // module import
-import {StatusCodes} from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 // domain import
 import IResponseDomain from '../../../domain/response.domain';
 // interface import
-import {IAddMessageResponse} from './addMessage.service.interface';
+import { IAddMessageResponse } from './addMessage.service.interface';
 
 /*
  * NOT_FOUND
@@ -41,4 +41,4 @@ const addMessageResponse: IAddMessageResponse = {
 
 export default addMessageResponse;
 
-export {USER_NOT_FOUND, INSERT_MESSAGE_ERROR, CREATED};
+export { CREATED, INSERT_MESSAGE_ERROR, USER_NOT_FOUND };

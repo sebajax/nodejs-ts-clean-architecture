@@ -1,9 +1,9 @@
 // domain import
-import {IMessageData} from '../../../controller/message/addMessage/addMessage.controller.interface';
+import { IMessageData } from '../../../controller/message/addMessage/addMessage.controller.interface';
 import IResponseDomain from '../../../domain/response.domain';
 // model import
-import {messageModel} from '../../../model/message/message.model.interface';
-import {userModel} from '../../../model/user/user.model.interface';
+import { messageModel } from '../../../model/message/message.model.interface';
+import { userModel } from '../../../model/user/user.model.interface';
 // service import
 import AddMessageService from './addMessage.service';
 
@@ -27,4 +27,4 @@ const addMessageService: IAddMessageService = new AddMessageService(
   userModel
 );
 
-export {IAddMessageResponse, IAddMessageService, addMessageService};
+export { addMessageService, IAddMessageResponse, IAddMessageService };

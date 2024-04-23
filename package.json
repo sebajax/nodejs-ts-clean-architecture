@@ -2,9 +2,11 @@
   "name": "nodejs-ts-clean-architecture",
   "version": "1.0.0",
   "private": true,
+  "description": "This archetype will help in the project building using Node.js and TypeScript.",
+  "author": "Sebastian Ituarte",
   "scripts": {
     "dev": "ts-node-dev --poll --respawn --transpile-only --no-deps --exit-child ./src/app.ts",
-    "lint": "",
+    "lint": "gts lint",
     "clean": "gts clean",
     "compile": "tsc",
     "fix": "gts fix",

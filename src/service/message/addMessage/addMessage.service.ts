@@ -1,13 +1,13 @@
 // domain import
 import IResponseDomain from '../../../domain/response.domain';
 // interface import
-import {IMessageModel} from '../../../model/message/message.model.interface';
-import {IMessageData} from '../../../controller/message/addMessage/addMessage.controller.interface';
+import { IMessageData } from '../../../controller/message/addMessage/addMessage.controller.interface';
+import { IMessageModel } from '../../../model/message/message.model.interface';
+import { IUserModel } from '../../../model/user/user.model.interface';
 import {
   IAddMessageResponse,
   IAddMessageService,
 } from './addMessage.service.interface';
-import {IUserModel} from '../../../model/user/user.model.interface';
 // service main class import
 import Service from '../../service';
 // response import

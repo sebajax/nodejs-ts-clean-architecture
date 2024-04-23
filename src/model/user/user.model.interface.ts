@@ -1,7 +1,7 @@
 // module import
-import {Optional} from 'sequelize';
+import { Optional } from 'sequelize';
 // model import
-import {UserModel} from '../index';
+import { UserModel } from '../index';
 
 interface IUserModel {
   userId: number;
@@ -10,7 +10,7 @@ interface IUserModel {
   createdAt: Date;
   updatedAt: Date;
   createUser(data: object): Promise<object>;
-  getUser(email: string): Promise<{userId: number} | null>;
+  getUser(email: string): Promise<{ userId: number } | null>;
 }
 
 type UserCreationAttributes = Optional<IUserModel, 'userId'>;
@@ -20,4 +20,4 @@ type UserCreationAttributes = Optional<IUserModel, 'userId'>;
  */
 const userModel: IUserModel = new UserModel();
 
-export {IUserModel, UserCreationAttributes, userModel};
+export { IUserModel, UserCreationAttributes, userModel };
