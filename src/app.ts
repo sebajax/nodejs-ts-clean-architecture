@@ -6,7 +6,7 @@ import morgan from 'morgan';
 import path from 'path';
 import routes from './api/route/route';
 import { VERSION_NUMBER } from './infraestructure/config/environment.config';
-import migrator from './infraestructure/database/migrator';
+import { MigrationError, migrator } from './infraestructure/database/migrator';
 import { logger } from './infraestructure/log/logger';
 
 const app: Application = express();
@@ -33,6 +33,12 @@ routes(app);
       logger.info(`API ${VERSION_NUMBER} running on PORT: ${process.env.PORT}`);
     });
   } catch (error) {
+    if (error instanceof MigrationError) {
+      // Ensure proper import and use of MigrationError
+      logger.error('Migration error:', (error as MigrationError).message);
+      logger.error('Migration error cause:', (error as MigrationError).cause);
+    }
+
     logger.error(`server error: ${error}`);
   }
 })();

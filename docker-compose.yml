@@ -30,10 +30,10 @@ services:
       POSTGRES_DB: ${DB_NAME}
       TZ: 'America/Santiago'
     healthcheck:
-      test: [ 'CMD-SHELL', 'pg_isready -U ${DB_USER} -d ${DB_NAME}' ]
+      test: ['CMD-SHELL', 'pg_isready -U ${DB_USER} -d ${DB_NAME}']
       interval: 5s
       timeout: 1s
       retries: 5
 volumes:
   pgdata:
-    name: nodejs-ts-abcdin-db
+    name: ${API_NAME}-db

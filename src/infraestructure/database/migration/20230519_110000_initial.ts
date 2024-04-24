@@ -1,11 +1,11 @@
 // module import
-import { DataTypes } from 'sequelize';
-// migration type import
-import { Migration } from '../migrator';
+import { DataTypes, QueryInterface } from 'sequelize';
 
-export const up: Migration = async ({
+export async function up({
   context: queryInterface,
-}): Promise<void> => {
+}: {
+  context: QueryInterface;
+}) {
   await queryInterface.createTable('user', {
     userId: {
       field: 'user_id',
@@ -99,11 +99,13 @@ export const up: Migration = async ({
   await queryInterface.addIndex('user', ['email'], {
     name: 'idx_user_email',
   });
-};
+}
 
-export const down: Migration = async ({
+export async function down({
   context: queryInterface,
-}): Promise<void> => {
+}: {
+  context: QueryInterface;
+}) {
   /*
   --- remove constraints to tables ---
   */
@@ -119,4 +121,4 @@ export const down: Migration = async ({
   */
   await queryInterface.dropTable('user');
   await queryInterface.dropTable('message');
-};
+}
