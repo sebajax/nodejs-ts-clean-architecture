@@ -26,4 +26,5 @@ FROM base AS release
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
 
+# Command
 CMD [ "node", "./dist/app.js" ]

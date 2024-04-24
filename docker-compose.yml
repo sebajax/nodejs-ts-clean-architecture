@@ -7,16 +7,17 @@ services:
       dockerfile: Dockerfile.dev
     volumes:
       - .:/app
-      - ./node_modules:/app/node_modules
-    command: npm run dev
+    working_dir: /app
     env_file:
       - .env
     ports:
       - '${PORT}:${PORT}'
     depends_on:
-      - db
+      db:
+        condition: service_healthy
   db:
     image: postgres:14.6-alpine
+    restart: always
     container_name: ${API_NAME}-db
     volumes:
       - pgdata:/var/lib/postgresql/data/
