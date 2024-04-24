@@ -5,7 +5,7 @@
   "description": "This archetype will help in the project building using Node.js and TypeScript.",
   "author": "Sebastian Ituarte",
   "scripts": {
-    "dev": "ts-node-dev --poll --respawn --transpile-only --no-deps --exit-child ./src/app.ts",
+    "dev": "nodemon -L ./src/app.ts",
     "lint": "gts lint",
     "clean": "gts clean",
     "compile": "tsc",
@@ -55,10 +55,10 @@
     "chai": "^5.1.0",
     "gts": "^5.3.0",
     "mocha": "^10.4.0",
+    "nodemon": "^3.1.0",
     "nyc": "^15.1.0",
     "sinon": "^17.0.1",
     "ts-node": "^10.9.2",
-    "ts-node-dev": "^2.0.0",
     "typescript": "~5.4.5"
   }
 }
