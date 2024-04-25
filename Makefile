@@ -14,13 +14,13 @@ generate-migration:
    typeorm migration:generate -d $(MIGRATION_SOURCE) src/infraestructure/database/migration/$(FILE)
 
 # Docker tasks
-build-server:
+build:
 	docker-compose -p nodejs-ts-clean-architecture build
 
-start-server:
+start:
 	docker-compose up -d
 
-stop-server:
+stop:
 	docker-compose down
 
 # Standalone usage for live reloading
@@ -29,10 +29,10 @@ live-reload:
 
 # Testing
 test:
-	go test ./...
+	npm run test
 
-test-coverage:
-	go test -cover ./...
+coverage:
+	npm run coverage
 
 # Cleaning, Formatting, Linting, and Vetting
 clean-deps:
