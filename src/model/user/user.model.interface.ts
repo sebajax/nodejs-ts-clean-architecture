@@ -1,23 +1,28 @@
-// module import
-import { Optional } from 'sequelize';
 // model import
-import { UserModel } from '../index';
+import { UserModel } from './user.model';
+import { UserEntity } from './user.model.entity';
+// db import
+import AppDataSource from '../../infraestructure/database/db';
 
-interface IUserModel {
-  userId: number;
+interface IUserEntity {
+  id?: number;
   name: string;
   email: string;
-  createdAt: Date;
-  updatedAt: Date;
-  createUser(data: object): Promise<object>;
-  getUser(email: string): Promise<{ userId: number } | null>;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
-type UserCreationAttributes = Optional<IUserModel, 'userId'>;
+interface IUserModel {
+  create(data: IUserEntity): Promise<IUserEntity>;
+  findUser(email: string): Promise<IUserEntity | null>;
+}
+
+// get entity repository
+const userRepository = AppDataSource.getRepository(UserEntity);
 
 /*
  * model factory init
  */
-const userModel: IUserModel = new UserModel();
+const userModel = new UserModel(userRepository);
 
-export { IUserModel, UserCreationAttributes, userModel };
+export { IUserEntity, IUserModel, userModel };

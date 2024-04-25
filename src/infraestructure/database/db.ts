@@ -1,38 +1,34 @@
 // module import
-import { Sequelize } from 'sequelize-typescript';
+import 'reflect-metadata';
+import { DataSource } from 'typeorm';
 // logger import
+import { join } from 'path';
 import { logger } from '../log/logger';
 
 /**
  * create a connection to the database
  */
-const db = new Sequelize(
-  `${process.env.DB_NAME}`,
-  `${process.env.DB_USER}`,
-  `${process.env.DB_PASSWORD}`,
-  {
-    logging: msg => logger.debug(msg),
-    host: `${process.env.DB_HOST}`,
-    dialect: 'postgres',
-    dialectOptions: {
-      socketPath: process.env.DB_SOCKET || null,
-    },
-    pool: {
-      max: parseInt(`${process.env.DB_POOL_MAX}`, 10) || 5,
-      min: parseInt(`${process.env.DB_POOL_MIN}`, 10) || 0,
-      acquire: parseInt(`${process.env.DB_POOL_ACQUIRE}`, 10) || 30000,
-      idle: parseInt(`${process.env.DB_POOL_IDLE}`, 10) || 10000,
-    },
-  }
-);
+const AppDataSource = new DataSource({
+  type: 'postgres',
+  host: `${process.env.DB_HOST}`,
+  port: parseInt(`${process.env.DB_PORT}`),
+  username: `${process.env.DB_USER}`,
+  password: `${process.env.DB_PASSWORD}`,
+  database: `${process.env.DB_NAME}`,
+  migrations: [join(__dirname, './migration/*{.ts,.js}')],
+  entities: [join(__dirname, '../../model/**/*.model.entity{.ts,.js}')],
+  synchronize: false,
+  logging: true,
+});
 
 (async () => {
   try {
-    await db.authenticate();
+    await AppDataSource.initialize();
     logger.info('connection to database has been established successfully.');
+    await AppDataSource.runMigrations();
   } catch (error) {
     logger.error(`unable to connect to the database: ${error}`);
   }
 })();
 
-export default db;
+export default AppDataSource;
