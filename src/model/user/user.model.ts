@@ -1,69 +1,29 @@
 // module import
-import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
+import { Repository } from 'typeorm';
 // interface import
-import { IUserModel, UserCreationAttributes } from './user.model.interface';
-// model import
-import MessageModel from '../message/message.model';
+import { IUserEntity, IUserModel } from './user.model.interface';
+// entity import
+import { UserEntity } from './user.model.entity';
 
-@Table({
-  tableName: 'user',
-  timestamps: true,
-})
-class UserModel
-  extends Model<IUserModel, UserCreationAttributes>
-  implements IUserModel
-{
-  @Column({
-    type: DataType.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-    field: 'user_id',
-  })
-  userId: number;
+export class UserModel implements IUserModel {
+  private userRepository: Repository<UserEntity>;
 
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  name: string;
-
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  email: string;
-
-  @Column({
-    type: DataType.DATE,
-    allowNull: false,
-    field: 'created_at',
-  })
-  createdAt: Date;
-
-  @Column({
-    type: DataType.DATE,
-    allowNull: false,
-    field: 'updated_at',
-  })
-  updatedAt: Date;
-
-  @HasMany(() => MessageModel)
-  messages: MessageModel[];
-
-  // method for creating a new user into the databse
-  public async createUser(user: UserCreationAttributes): Promise<object> {
-    const userCreate = new UserModel(user);
-    return userCreate.save();
+  public constructor(userRepository: Repository<UserEntity>) {
+    this.userRepository = userRepository;
   }
 
-  // method to get the user data by the email
-  public async getUser(email: string): Promise<{ userId: number } | null> {
-    return UserModel.findOne({
+  public async create(user: IUserEntity): Promise<IUserEntity> {
+    const createdUser = await this.userRepository.save(user);
+    console.log(createdUser);
+    return createdUser;
+  }
+
+  public async findUser(email: string): Promise<IUserEntity | null> {
+    const user = await this.userRepository.findOne({
       where: {
         email,
       },
     });
+    return user;
   }
 }
-
-export default UserModel;

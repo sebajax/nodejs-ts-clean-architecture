@@ -1,8 +1,17 @@
-.PHONY: build-server start-server stop-server live-reload test test-coverage clean-deps format clean-imports lint vet check-shadow lint-format migrate-create migrate-up
+.PHONY: generate-migration build-server start-server stop-server live-reload test test-coverage clean-deps format clean-imports lint vet check-shadow lint-format migrate-create migrate-up
+
+# Load environment variables
+include .env
+export
 
 # Define variable for migration directory and PostgreSQL URL
-MIGRATION_DIR = /migration
-POSTGRESQL_URL = your_postgresql_connection_string # Replace with your actual connection string
+MIGRATION_SOURCE = dist/infraestructure/database/db.js
+
+# Generate migration scripts
+generate-migration:
+	npm run compile && \
+   npx cross-env DB_HOST="$(DB_HOST)" DB_PORT=$(DB_PORT) DB_USER=$(DB_USER) DB_PASSWORD=$(DB_PASSWORD) DB_NAME=$(DB_NAME) \
+   typeorm migration:generate -d $(MIGRATION_SOURCE) src/infraestructure/database/migration/$(FILE)
 
 # Docker tasks
 build-server:

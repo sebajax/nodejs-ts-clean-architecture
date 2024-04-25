@@ -14,7 +14,8 @@ import { IAddUserService } from '../../../service/user/addUser/addUser.service.i
 // service import
 import AddUserService from '../../../service/user/addUser/addUser.service';
 // model import
-import UserModel from '../../../model/user/user.model';
+import { UserModel } from '../../../model/user/user.model';
+import { IUserEntity } from '../../../model/user/user.model.interface';
 
 const expect = chai.expect;
 
@@ -33,16 +34,20 @@ describe('#AddUserService()', () => {
 
   it('It should pass and return that the user was created successfully CREATED', async () => {
     // mock create user response
-    const userId = 1;
+    const userCreated: IUserEntity = {
+      id: 1,
+      name: 'Test',
+      email: 'test@test.com',
+    };
 
     // create a stub instance for models
-    const userModel = sinon.createStubInstance(UserModel, {
-      getUser: Promise.resolve(null),
-      createUser: Promise.resolve({ userId }),
+    const userModelMock = sinon.createStubInstance(UserModel, {
+      create: Promise.resolve(userCreated),
+      findUser: Promise.resolve(null),
     });
 
     // instance AddUserService class
-    const addUserService: IAddUserService = new AddUserService(userModel);
+    const addUserService: IAddUserService = new AddUserService(userModelMock);
 
     // execute use case
     const result = await addUserService.addUser(userData);
@@ -54,8 +59,8 @@ describe('#AddUserService()', () => {
     };
 
     // sinon - assert stubs expectation
-    sinon.assert.calledOnceWithExactly(userModel.getUser, userData.email);
-    sinon.assert.calledOnceWithExactly(userModel.createUser, sinon.match(user));
+    sinon.assert.calledOnceWithExactly(userModelMock.findUser, userData.email);
+    sinon.assert.calledOnceWithExactly(userModelMock.create, sinon.match(user));
 
     // chai - assert usecase expectation
     expect(result).to.be.a('object');
@@ -64,18 +69,22 @@ describe('#AddUserService()', () => {
     expect(result).to.have.property('message', CREATED.message);
     expect(result).to.have.property('data').to.be.a('object');
     expect(result.data)
-      .to.have.property('userId')
+      .to.have.property('id')
       .to.be.a('number')
-      .to.be.eql(userId);
+      .to.be.eql(userCreated.id);
   });
 
   it('It should not pass and return user already exists USER_EXISTS', async () => {
-    // mock get user response
-    const userId = 1;
+    // mock finded user response
+    const findedUser: IUserEntity = {
+      id: 1,
+      name: 'Test',
+      email: 'test@test.com',
+    };
 
     // create a stub instance for models
     const userModel = sinon.createStubInstance(UserModel, {
-      getUser: Promise.resolve({ userId }),
+      findUser: Promise.resolve(findedUser),
     });
 
     // instance AddUserService class
@@ -85,8 +94,8 @@ describe('#AddUserService()', () => {
     const result = await addUserService.addUser(userData);
 
     // sinon - assert stubs expectation
-    sinon.assert.calledOnceWithExactly(userModel.getUser, userData.email);
-    sinon.assert.notCalled(userModel.createUser);
+    sinon.assert.calledOnceWithExactly(userModel.findUser, userData.email);
+    sinon.assert.notCalled(userModel.create);
 
     // chai - assert usecase expectation
     expect(result).to.be.a('object');
@@ -98,7 +107,7 @@ describe('#AddUserService()', () => {
   it('It should fail when an exception occurs INSERT_USER_ERROR', async () => {
     // create a stub instance for models
     const userModel = sinon.createStubInstance(UserModel, {
-      getUser: Promise.reject(new Error('error')),
+      findUser: Promise.reject(new Error('error')),
     });
 
     // instance AddUserService class
@@ -108,8 +117,8 @@ describe('#AddUserService()', () => {
     const result = await addUserService.addUser(userData);
 
     // sinon - assert stubs expectation
-    sinon.assert.calledOnceWithExactly(userModel.getUser, userData.email);
-    sinon.assert.notCalled(userModel.createUser);
+    sinon.assert.calledOnceWithExactly(userModel.findUser, userData.email);
+    sinon.assert.notCalled(userModel.create);
 
     // chai - assert usecase expectation
     expect(result).to.be.a('object');

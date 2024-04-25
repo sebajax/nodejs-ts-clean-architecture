@@ -18,7 +18,8 @@
     "posttest": "npm run lint",
     "prepare": "npm run compile",
     "prettier_check": "npx prettier --check ./src",
-    "prettier_write": "npx prettier --write ./src"
+    "prettier_write": "npx prettier --write ./src",
+    "typeorm": "typeorm-ts-node-commonjs"
   },
   "husky": {
     "hooks": {
@@ -37,9 +38,7 @@
     "pg": "^8.11.5",
     "pg-hstore": "^2.3.4",
     "reflect-metadata": "^0.2.2",
-    "sequelize": "^6.37.3",
-    "sequelize-typescript": "^2.1.6",
-    "umzug": "^3.8.0",
+    "typeorm": "^0.3.20",
     "winston": "^3.13.0"
   },
   "devDependencies": {
@@ -50,9 +49,9 @@
     "@types/morgan": "^1.9.9",
     "@types/node": "20.12.7",
     "@types/sinon": "^17.0.3",
-    "@types/umzug": "^2.3.7",
     "@types/validator": "^13.11.9",
     "chai": "^5.1.0",
+    "cross-env": "^7.0.3",
     "gts": "^5.3.0",
     "mocha": "^10.4.0",
     "nodemon": "^3.1.0",

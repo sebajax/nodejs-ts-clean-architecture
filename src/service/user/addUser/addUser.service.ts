@@ -23,7 +23,7 @@ class AddUserService extends Service implements IAddUserService {
     try {
       // check that email does not exist
       // check if is a valid user using user model
-      const checkUser = await this.userModel.getUser(userData.email);
+      const checkUser = await this.userModel.findUser(userData.email);
       if (checkUser !== null) {
         return this.response.USER_EXISTS;
       }
@@ -34,7 +34,7 @@ class AddUserService extends Service implements IAddUserService {
         email: userData.email,
       };
 
-      const createdUser = await this.userModel.createUser(user);
+      const createdUser = await this.userModel.create(user);
 
       // if all the process was succuessfully we return an OK status
       return {
