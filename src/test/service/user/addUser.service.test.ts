@@ -9,13 +9,16 @@ import {
   USER_EXISTS,
 } from '../../../service/user/addUser/addUser.response';
 // interface import
-import { IUserData } from '../../../controller/user/addUser/addUser.controller.interface';
 import { IAddUserService } from '../../../service/user/addUser/addUser.service.interface';
 // service import
 import AddUserService from '../../../service/user/addUser/addUser.service';
 // model import
 import { UserModel } from '../../../model/user/user.model';
-import { IUserEntity } from '../../../model/user/user.model.interface';
+// dto import
+import { CreateUserDTO } from '../../../model/user/dto/createUser.dto';
+import { FindUserDTO } from '../../../model/user/dto/findUser.dto';
+// domain import
+import { UserDomain } from '../../../domain/user.domain';
 
 const expect = chai.expect;
 
@@ -26,23 +29,16 @@ describe('#AddUserService()', () => {
     sinon.restore();
   });
 
-  // mock request body
-  const userData = {
-    name: 'John Doo',
-    email: 'example@example.com',
-  } as IUserData;
+  // create a user domain instance from body
+  const user = new UserDomain('John Doo', 'example@example.com');
 
   it('It should pass and return that the user was created successfully CREATED', async () => {
     // mock create user response
-    const userCreated: IUserEntity = {
-      id: 1,
-      name: 'Test',
-      email: 'test@test.com',
-    };
+    const userCreated = new CreateUserDTO(1, 'test@test.com');
 
     // create a stub instance for models
     const userModelMock = sinon.createStubInstance(UserModel, {
-      create: Promise.resolve(userCreated),
+      createUser: Promise.resolve(userCreated),
       findUser: Promise.resolve(null),
     });
 
@@ -50,17 +46,14 @@ describe('#AddUserService()', () => {
     const addUserService: IAddUserService = new AddUserService(userModelMock);
 
     // execute use case
-    const result = await addUserService.addUser(userData);
-
-    // map user data to user model data
-    const user = {
-      name: userData.name,
-      email: userData.email,
-    };
+    const result = await addUserService.addUser(user);
 
     // sinon - assert stubs expectation
-    sinon.assert.calledOnceWithExactly(userModelMock.findUser, userData.email);
-    sinon.assert.calledOnceWithExactly(userModelMock.create, sinon.match(user));
+    sinon.assert.calledOnceWithExactly(userModelMock.findUser, user.email);
+    sinon.assert.calledOnceWithExactly(
+      userModelMock.createUser,
+      sinon.match(user)
+    );
 
     // chai - assert usecase expectation
     expect(result).to.be.a('object');
@@ -76,11 +69,7 @@ describe('#AddUserService()', () => {
 
   it('It should not pass and return user already exists USER_EXISTS', async () => {
     // mock finded user response
-    const findedUser: IUserEntity = {
-      id: 1,
-      name: 'Test',
-      email: 'test@test.com',
-    };
+    const findedUser = new FindUserDTO(1, 'Test', 'test@test.com');
 
     // create a stub instance for models
     const userModel = sinon.createStubInstance(UserModel, {
@@ -91,11 +80,11 @@ describe('#AddUserService()', () => {
     const addUserService: IAddUserService = new AddUserService(userModel);
 
     // execute use case
-    const result = await addUserService.addUser(userData);
+    const result = await addUserService.addUser(user);
 
     // sinon - assert stubs expectation
-    sinon.assert.calledOnceWithExactly(userModel.findUser, userData.email);
-    sinon.assert.notCalled(userModel.create);
+    sinon.assert.calledOnceWithExactly(userModel.findUser, user.email);
+    sinon.assert.notCalled(userModel.createUser);
 
     // chai - assert usecase expectation
     expect(result).to.be.a('object');
@@ -114,11 +103,11 @@ describe('#AddUserService()', () => {
     const addUserService: IAddUserService = new AddUserService(userModel);
 
     // execute use case
-    const result = await addUserService.addUser(userData);
+    const result = await addUserService.addUser(user);
 
     // sinon - assert stubs expectation
-    sinon.assert.calledOnceWithExactly(userModel.findUser, userData.email);
-    sinon.assert.notCalled(userModel.create);
+    sinon.assert.calledOnceWithExactly(userModel.findUser, user.email);
+    sinon.assert.notCalled(userModel.createUser);
 
     // chai - assert usecase expectation
     expect(result).to.be.a('object');
