@@ -1,7 +1,7 @@
 // domain import
 import IResponseDomain from '../../../domain/response.domain';
+import { IUserDomain } from '../../../domain/user.domain';
 // interface import
-import { IUserData } from '../../../controller/user/addUser/addUser.controller.interface';
 import { IUserModel } from '../../../model/user/user.model.interface';
 import { IAddUserResponse, IAddUserService } from './addUser.service.interface';
 // service main class import
@@ -19,7 +19,7 @@ class AddUserService extends Service implements IAddUserService {
     this.userModel = userModel;
   }
 
-  public async addUser(userData: IUserData): Promise<IResponseDomain> {
+  public async addUser(userData: IUserDomain): Promise<IResponseDomain> {
     try {
       // check that email does not exist
       // check if is a valid user using user model
@@ -34,7 +34,7 @@ class AddUserService extends Service implements IAddUserService {
         email: userData.email,
       };
 
-      const createdUser = await this.userModel.create(user);
+      const createdUser = await this.userModel.createUser(user);
 
       // if all the process was succuessfully we return an OK status
       return {

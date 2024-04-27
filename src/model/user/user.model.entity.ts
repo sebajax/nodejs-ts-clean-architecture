@@ -6,11 +6,9 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-// interface import
-import { IUserEntity } from './user.model.interface';
 
 @Entity()
-export class UserEntity implements IUserEntity {
+export class UserEntity {
   @PrimaryGeneratedColumn()
   id: number;
 

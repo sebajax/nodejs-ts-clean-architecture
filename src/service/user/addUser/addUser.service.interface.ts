@@ -1,6 +1,6 @@
 // domain import
-import { IUserData } from '../../../controller/user/addUser/addUser.controller.interface';
 import IResponseDomain from '../../../domain/response.domain';
+import { IUserDomain } from '../../../domain/user.domain';
 // model import
 import { userModel } from '../../../model/user/user.model.interface';
 // service import
@@ -15,7 +15,7 @@ interface IAddUserResponse {
 
 // interface to implement the service
 interface IAddUserService {
-  addUser(userData: IUserData): Promise<IResponseDomain>;
+  addUser(userData: IUserDomain): Promise<IResponseDomain>;
 }
 
 /*

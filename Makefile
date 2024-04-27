@@ -1,17 +1,10 @@
-.PHONY: generate-migration build-server start-server stop-server live-reload test test-coverage clean-deps format clean-imports lint vet check-shadow lint-format migrate-create migrate-up
-
+.PHONY: build start stop live-reload test coverage lint generate-migration migration-up migration-down
 # Load environment variables
 include .env
 export
 
 # Define variable for migration directory and PostgreSQL URL
 MIGRATION_SOURCE = dist/infraestructure/database/db.js
-
-# Generate migration scripts
-generate-migration:
-	npm run compile && \
-   npx cross-env DB_HOST="$(DB_HOST)" DB_PORT=$(DB_PORT) DB_USER=$(DB_USER) DB_PASSWORD=$(DB_PASSWORD) DB_NAME=$(DB_NAME) \
-   typeorm migration:generate -d $(MIGRATION_SOURCE) src/infraestructure/database/migration/$(FILE)
 
 # Docker tasks
 build:
@@ -25,7 +18,7 @@ stop:
 
 # Standalone usage for live reloading
 live-reload:
-	air
+	npm run dev
 
 # Testing
 test:
@@ -35,34 +28,20 @@ coverage:
 	npm run coverage
 
 # Cleaning, Formatting, Linting, and Vetting
-clean-deps:
-	go mod tidy
-
-format:
-	go fmt ./...
-
-clean-imports:
-	goimports -l -w .
-
 lint:
-	golangci-lint run ./...
-
-vet:
-	go vet ./...
-
-check-shadow:
-	shadow ./...
-
-lint-format:
-	go fmt ./...
-	go vet ./...
-	golangci-lint run ./...
+	npm run lint
 
 # Database Migration
-migrate-create:
+# Generate migration scripts
+generate-migration:
+	npm run compile && \
+   npx cross-env DB_HOST="$(DB_HOST)" DB_PORT=$(DB_PORT) DB_USER=$(DB_USER) DB_PASSWORD=$(DB_PASSWORD) DB_NAME=$(DB_NAME) \
+   typeorm migration:generate -d $(MIGRATION_SOURCE) src/infraestructure/database/migration/$(FILE)
+
+migration-up:
 	migrate create -ext sql -dir $(MIGRATIONS_DIR) -seq $(name)
 
-migrate-up:
+migration-down:
 	migrate -database $(POSTGRESQL_URL) -path $(MIGRATIONS_DIR) up
 
 # Usage instructions:
