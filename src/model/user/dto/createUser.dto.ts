@@ -1,4 +1,15 @@
-export class CreateUserDTO {
+/*
+ * create a new user dto
+ */
+
+// interface
+export interface ICreateUserDTO {
+  id: number;
+  email: string;
+}
+
+// class
+export class CreateUserDTO implements ICreateUserDTO {
   id: number;
   email: string;
 

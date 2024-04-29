@@ -5,8 +5,8 @@ import { IUserModel } from './user.model.interface';
 // entity import
 import { UserEntity } from './user.model.entity';
 // dto import
-import { CreateUserDTO } from './dto/createUser.dto';
-import { FindUserDTO } from './dto/findUser.dto';
+import { CreateUserDTO, ICreateUserDTO } from './dto/createUser.dto';
+import { FindUserDTO, IFindUserDTO } from './dto/findUser.dto';
 // domain import
 import { IUserDomain } from '../../domain/user.domain';
 
@@ -17,17 +17,22 @@ export class UserModel implements IUserModel {
     this.userRepository = userRepository;
   }
 
-  public async createUser(user: IUserDomain): Promise<CreateUserDTO> {
+  public async createUser(user: IUserDomain): Promise<ICreateUserDTO> {
     const createdUser = await this.userRepository.save(user);
     return new CreateUserDTO(createdUser.id, createdUser.email);
   }
 
-  public async findUser(email: string): Promise<FindUserDTO | null> {
+  public async findUser(email: string): Promise<IFindUserDTO | null> {
     const user = await this.userRepository.findOne({
       where: {
         email,
       },
     });
-    return user;
+
+    if (user !== null) {
+      return new FindUserDTO(user.id, user.name, user.email);
+    }
+
+    return null;
   }
 }

@@ -2,9 +2,9 @@
   "extends": "./node_modules/gts/",
   "rules": {
     "node/no-unpublished-import": [
-      "error", 
+      "error",
       {
-        "allowModules": ["sinon", "mocha", "chai"]
+        "allowModules": ["jest"]
       }
     ],
     "prettier/prettier": [
