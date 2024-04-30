@@ -1,5 +1,7 @@
 // domain import
-import IResponseDomain from '../../../domain/response.domain';
+import IResponseDomain, {
+  ResponseDomain,
+} from '../../../domain/response.domain';
 import { UserDomain } from '../../../domain/user.domain';
 // interface import
 import { IUserModel } from '../../../model/user/user.model.interface';
@@ -25,17 +27,14 @@ class AddUserService extends Service {
       // check if is a valid user using user model
       const checkUser = await this.userModel.findUser(user.email);
       if (checkUser !== null) {
-        return this.response.USER_EXISTS;
+        return new ResponseDomain(this.response.USER_EXISTS);
       }
 
       // creating a new user
       const createdUser = await this.userModel.createUser(user);
 
       // if all the process was succuessfully we return an OK status
-      return {
-        ...this.response.CREATED,
-        data: createdUser,
-      };
+      return new ResponseDomain(this.response.CREATED, createdUser);
     } catch (error) {
       this.logger.error(`${AddUserService.name} error ${error}`);
       return this.response.INSERT_USER_ERROR;

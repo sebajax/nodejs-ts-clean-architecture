@@ -2,13 +2,13 @@
  * user domain
  */
 
-// domain interface
+// user domain interface
 export interface IUserDomain {
   name: string;
   email: string;
 }
 
-// domain class
+// user domain class
 export class UserDomain implements IUserDomain {
   name: string;
   email: string;

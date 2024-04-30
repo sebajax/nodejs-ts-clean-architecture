@@ -1,12 +1,13 @@
 // module import
+import { plainToClass } from 'class-transformer';
 import { Repository } from 'typeorm';
 // interface import
 import { IUserModel } from './user.model.interface';
 // entity import
 import { UserEntity } from './user.model.entity';
 // dto import
-import { CreateUserDTO, ICreateUserDTO } from './dto/createUser.dto';
-import { FindUserDTO, IFindUserDTO } from './dto/findUser.dto';
+import { CreateUserDto } from './dto/createUser.dto';
+import { QueryUserDto } from './dto/queryUser.dto';
 // domain import
 import { UserDomain } from '../../domain/user.domain';
 
@@ -17,12 +18,14 @@ export class UserModel implements IUserModel {
     this.userRepository = userRepository;
   }
 
-  public async createUser(user: UserDomain): Promise<ICreateUserDTO> {
+  public async createUser(user: UserDomain): Promise<CreateUserDto> {
     const createdUser = await this.userRepository.save(user);
-    return new CreateUserDTO(createdUser.id, createdUser.email);
+    return plainToClass(CreateUserDto, createdUser, {
+      excludeExtraneousValues: true,
+    });
   }
 
-  public async findUser(email: string): Promise<IFindUserDTO | null> {
+  public async findUser(email: string): Promise<QueryUserDto | null> {
     const user = await this.userRepository.findOne({
       where: {
         email,
@@ -30,7 +33,9 @@ export class UserModel implements IUserModel {
     });
 
     if (user !== null) {
-      return new FindUserDTO(user.id, user.name, user.email);
+      return plainToClass(QueryUserDto, user, {
+        excludeExtraneousValues: true,
+      });
     }
 
     return null;

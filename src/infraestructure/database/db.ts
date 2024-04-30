@@ -1,5 +1,4 @@
 // module import
-import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 // logger import
 import { join } from 'path';
