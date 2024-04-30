@@ -4,14 +4,14 @@ import { StatusCodes } from 'http-status-codes';
 import { ObjectSchema } from 'joi';
 // domain import
 import IResponseDomain from '../../../domain/response.domain';
+import { IUserDomain, UserDomain } from '../../../domain/user.domain';
 // controller main class import
 import Controller from '../../controller';
 // interface import
 import { IAddUserService } from '../../../service/user/addUser/addUser.service.interface';
-// domain import
-import { IUserDomain, UserDomain } from '../../../domain/user.domain';
+import { IAddUserController } from './addUser.controller.interface';
 
-class AddUserController extends Controller {
+class AddUserController extends Controller implements IAddUserController {
   private addUserService: IAddUserService;
 
   public constructor(

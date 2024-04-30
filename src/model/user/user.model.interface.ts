@@ -4,13 +4,13 @@ import { UserEntity } from './user.model.entity';
 // db import
 import AppDataSource from '../../infraestructure/database/db';
 // domain import
-import { IUserDomain } from '../../domain/user.domain';
+import { UserDomain } from '../../domain/user.domain';
 // dto import
 import { ICreateUserDTO } from './dto/createUser.dto';
 import { IFindUserDTO } from './dto/findUser.dto';
 
 interface IUserModel {
-  createUser(data: IUserDomain): Promise<ICreateUserDTO>;
+  createUser(data: UserDomain): Promise<ICreateUserDTO>;
   findUser(email: string): Promise<IFindUserDTO | null>;
 }
 

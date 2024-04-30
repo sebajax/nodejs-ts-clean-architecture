@@ -1,13 +1,9 @@
 // response import
-import {
-  CREATED,
-  INSERT_USER_ERROR,
-  USER_EXISTS,
-} from '../../../service/user/addUser/addUser.response';
+import { CREATED, INSERT_USER_ERROR, USER_EXISTS } from './addUser.response';
 // interface import
-import { IAddUserService } from '../../../service/user/addUser/addUser.service.interface';
+import { IAddUserService } from './addUser.service.interface';
 // service import
-import AddUserService from '../../../service/user/addUser/addUser.service';
+import AddUserService from './addUser.service';
 // dto import
 import { CreateUserDTO } from '../../../model/user/dto/createUser.dto';
 import { FindUserDTO } from '../../../model/user/dto/findUser.dto';

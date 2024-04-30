@@ -1,15 +1,15 @@
 // domain import
 import IResponseDomain from '../../../domain/response.domain';
-import { IUserDomain } from '../../../domain/user.domain';
+import { UserDomain } from '../../../domain/user.domain';
 // interface import
 import { IUserModel } from '../../../model/user/user.model.interface';
-import { IAddUserResponse, IAddUserService } from './addUser.service.interface';
+import { IAddUserResponse } from './addUser.service.interface';
 // service main class import
 import Service from '../../service';
 // response import
 import addUserResponse from './addUser.response';
 
-class AddUserService extends Service implements IAddUserService {
+class AddUserService extends Service {
   private response: IAddUserResponse;
   private userModel: IUserModel;
 
@@ -19,21 +19,16 @@ class AddUserService extends Service implements IAddUserService {
     this.userModel = userModel;
   }
 
-  public async addUser(userData: IUserDomain): Promise<IResponseDomain> {
+  public async addUser(user: UserDomain): Promise<IResponseDomain> {
     try {
       // check that email does not exist
       // check if is a valid user using user model
-      const checkUser = await this.userModel.findUser(userData.email);
+      const checkUser = await this.userModel.findUser(user.email);
       if (checkUser !== null) {
         return this.response.USER_EXISTS;
       }
 
-      // map user data to user model data
-      const user = {
-        name: userData.name,
-        email: userData.email,
-      };
-
+      // creating a new user
       const createdUser = await this.userModel.createUser(user);
 
       // if all the process was succuessfully we return an OK status
