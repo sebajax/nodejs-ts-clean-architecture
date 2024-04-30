@@ -6,12 +6,12 @@ import AppDataSource from '../../infraestructure/database/db';
 // domain import
 import { UserDomain } from '../../domain/user.domain';
 // dto import
-import { ICreateUserDTO } from './dto/createUser.dto';
-import { IFindUserDTO } from './dto/findUser.dto';
+import { CreateUserDto } from './dto/createUser.dto';
+import { QueryUserDto } from './dto/queryUser.dto';
 
 interface IUserModel {
-  createUser(data: UserDomain): Promise<ICreateUserDTO>;
-  findUser(email: string): Promise<IFindUserDTO | null>;
+  createUser(user: UserDomain): Promise<CreateUserDto>;
+  findUser(email: string): Promise<QueryUserDto | null>;
 }
 
 // get entity repository

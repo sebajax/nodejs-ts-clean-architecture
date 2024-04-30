@@ -6,7 +6,7 @@ import { IAddUserService } from './addUser.service.interface';
 import AddUserService from './addUser.service';
 // dto import
 import { CreateUserDTO } from '../../../model/user/dto/createUser.dto';
-import { FindUserDTO } from '../../../model/user/dto/findUser.dto';
+import { FindUserDTO } from '../../../model/user/dto/queryUser.dto';
 // domain import
 import { UserDomain } from '../../../domain/user.domain';
 
