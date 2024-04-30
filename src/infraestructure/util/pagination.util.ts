@@ -13,8 +13,8 @@ class PaginationUtil {
     page: number
   ): { total: number; current: number } {
     return {
-      current: page <= 0 ? 1 : page,
       total: Math.ceil(count / this.limit),
+      current: page <= 0 ? 1 : page,
     };
   }
 }

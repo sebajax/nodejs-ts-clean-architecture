@@ -8,7 +8,7 @@ import { UserEntity } from './user.model.entity';
 import { CreateUserDTO, ICreateUserDTO } from './dto/createUser.dto';
 import { FindUserDTO, IFindUserDTO } from './dto/findUser.dto';
 // domain import
-import { IUserDomain } from '../../domain/user.domain';
+import { UserDomain } from '../../domain/user.domain';
 
 export class UserModel implements IUserModel {
   private userRepository: Repository<UserEntity>;
@@ -17,7 +17,7 @@ export class UserModel implements IUserModel {
     this.userRepository = userRepository;
   }
 
-  public async createUser(user: IUserDomain): Promise<ICreateUserDTO> {
+  public async createUser(user: UserDomain): Promise<ICreateUserDTO> {
     const createdUser = await this.userRepository.save(user);
     return new CreateUserDTO(createdUser.id, createdUser.email);
   }
