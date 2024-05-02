@@ -1,18 +1,15 @@
 // domain import
-import {
-  IResponseDomain,
-  ResponseDomain,
-} from '../../../domain/response.domain';
+import { ResponseDomain } from '../../../domain/response.domain';
 import { UserDomain } from '../../../domain/user.domain';
 // interface import
 import { IUserModel } from '../../../model/user/user.model.interface';
-import { IAddUserResponse } from './addUser.service.interface';
+import { IAddUserResponse, IAddUserService } from './addUser.service.interface';
 // service main class import
 import { Service } from '../../service';
 // response import
-import addUserResponse from './addUser.response';
+import { addUserResponse } from './addUser.response';
 
-export class AddUserService extends Service {
+export class AddUserService extends Service implements IAddUserService {
   private response: IAddUserResponse;
   private userModel: IUserModel;
 
@@ -22,7 +19,7 @@ export class AddUserService extends Service {
     this.userModel = userModel;
   }
 
-  public async addUser(user: UserDomain): Promise<IResponseDomain> {
+  public async addUser(user: UserDomain): Promise<ResponseDomain> {
     try {
       // check that email does not exist
       // check if is a valid user using user model

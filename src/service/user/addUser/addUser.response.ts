@@ -39,6 +39,4 @@ const addUserResponse: IAddUserResponse = {
   CREATED,
 };
 
-export default addUserResponse;
-
-export { CREATED, INSERT_USER_ERROR, USER_EXISTS };
+export { addUserResponse, CREATED, INSERT_USER_ERROR, USER_EXISTS };

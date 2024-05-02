@@ -1,7 +1,7 @@
 // module import
 import winston, { Logger } from 'winston';
 // domain import
-import { ILogDomain, IMessageDomain } from '../../domain/logger.domain';
+import { ILogDomain, ILogMessageDomain } from '../../domain/logger.domain';
 // infraestructure import
 import {
   API_NAME,
@@ -39,7 +39,7 @@ const logMessage: ILogDomain = {
     method: string,
     body: object
   ): string => {
-    const message: IMessageDomain = {
+    const message: ILogMessageDomain = {
       requestMethod,
       controller,
       method,
@@ -53,7 +53,7 @@ const logMessage: ILogDomain = {
     statusCode: number,
     errorMessage: string
   ): string => {
-    const message: IMessageDomain = {
+    const message: ILogMessageDomain = {
       requestMethod,
       controller,
       statusCode,

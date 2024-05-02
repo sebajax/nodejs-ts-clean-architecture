@@ -2,7 +2,7 @@
 import express, { Request, Response } from 'express';
 // middleware import
 import { checkBodyMiddleware } from '../middleware/checkBody.middleware';
-// interface import
+// controller import
 import { addUserController } from '../../controller/user/addUser/addUser.controller.interface';
 
 const router = express.Router();

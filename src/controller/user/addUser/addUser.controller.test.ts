@@ -4,9 +4,9 @@ import { Request, Response } from 'express';
 import { ResponseDomain } from '../../../domain/response.domain';
 import { UserDomain } from '../../../domain/user.domain';
 // response import
-import addUserResponse from '../../../service/user/addUser/addUser.response';
+import { addUserResponse } from '../../../service/user/addUser/addUser.response';
 // schema import
-import { addUserSchema } from '../../../schema/user.schema';
+import { addUserSchema } from './addUser.controller.schema';
 // controller import
 import { TestController } from '../../test.controller';
 import { AddUserController } from './addUser.controller';
