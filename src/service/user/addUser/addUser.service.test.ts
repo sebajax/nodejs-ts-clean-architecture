@@ -1,7 +1,7 @@
 // response import
 import { CREATED, INSERT_USER_ERROR, USER_EXISTS } from './addUser.response';
 // service import
-import AddUserService from './addUser.service';
+import { AddUserService } from './addUser.service';
 // domain import
 import { UserDomain } from '../../../domain/user.domain';
 

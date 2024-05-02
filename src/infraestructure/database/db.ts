@@ -7,7 +7,7 @@ import { logger } from '../log/logger';
 /**
  * create a connection to the database
  */
-const AppDataSource = new DataSource({
+export const AppDataSource = new DataSource({
   type: 'postgres',
   host: `${process.env.DB_HOST}`,
   port: parseInt(`${process.env.DB_PORT}`),
@@ -29,5 +29,3 @@ const AppDataSource = new DataSource({
     logger.error(`unable to connect to the database: ${error}`);
   }
 })();
-
-export default AppDataSource;

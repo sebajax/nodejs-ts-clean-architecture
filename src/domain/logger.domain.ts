@@ -1,9 +1,15 @@
-interface ILogDomain {
+/*
+ * logger domain
+ */
+
+// log domain interface
+export interface ILogDomain {
   init: Function;
   error: Function;
 }
 
-interface IMessageDomain {
+// message domain interface
+export interface IMessageDomain {
   requestMethod: string;
   controller: string;
   method?: string;
@@ -11,5 +17,3 @@ interface IMessageDomain {
   statusCode?: number;
   errorMessage?: string;
 }
-
-export { ILogDomain, IMessageDomain };

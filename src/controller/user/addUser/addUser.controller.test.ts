@@ -8,8 +8,8 @@ import addUserResponse from '../../../service/user/addUser/addUser.response';
 // schema import
 import { addUserSchema } from '../../../schema/user.schema';
 // controller import
-import TestController from '../../test.controller';
-import AddUserController from './addUser.controller';
+import { TestController } from '../../test.controller';
+import { AddUserController } from './addUser.controller';
 
 // test #AddUserController()
 describe('#AddUserController()', () => {
