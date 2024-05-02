@@ -8,7 +8,7 @@ import { logMessage, logger } from '../infraestructure/log/logger';
 /*
  * services main class import all the services must extend this class
  */
-abstract class Service {
+export abstract class Service {
   public logger: Logger;
   public logMessage: ILogDomain;
 
@@ -17,5 +17,3 @@ abstract class Service {
     this.logMessage = logMessage;
   }
 }
-
-export default Service;

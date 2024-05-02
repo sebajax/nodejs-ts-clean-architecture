@@ -1,5 +1,6 @@
 // domain import
-import IResponseDomain, {
+import {
+  IResponseDomain,
   ResponseDomain,
 } from '../../../domain/response.domain';
 import { UserDomain } from '../../../domain/user.domain';
@@ -7,11 +8,11 @@ import { UserDomain } from '../../../domain/user.domain';
 import { IUserModel } from '../../../model/user/user.model.interface';
 import { IAddUserResponse } from './addUser.service.interface';
 // service main class import
-import Service from '../../service';
+import { Service } from '../../service';
 // response import
 import addUserResponse from './addUser.response';
 
-class AddUserService extends Service {
+export class AddUserService extends Service {
   private response: IAddUserResponse;
   private userModel: IUserModel;
 
@@ -41,5 +42,3 @@ class AddUserService extends Service {
     }
   }
 }
-
-export default AddUserService;

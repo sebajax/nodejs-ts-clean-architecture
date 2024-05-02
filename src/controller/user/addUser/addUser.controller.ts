@@ -3,15 +3,18 @@ import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { ObjectSchema } from 'joi';
 // domain import
-import IResponseDomain from '../../../domain/response.domain';
+import { IResponseDomain } from '../../../domain/response.domain';
 import { IUserDomain, UserDomain } from '../../../domain/user.domain';
 // controller main class import
-import Controller from '../../controller';
+import { Controller } from '../../controller';
 // interface import
 import { IAddUserService } from '../../../service/user/addUser/addUser.service.interface';
 import { IAddUserController } from './addUser.controller.interface';
 
-class AddUserController extends Controller implements IAddUserController {
+export class AddUserController
+  extends Controller
+  implements IAddUserController
+{
   private addUserService: IAddUserService;
 
   public constructor(
@@ -62,5 +65,3 @@ class AddUserController extends Controller implements IAddUserController {
     }
   }
 }
-
-export default AddUserController;

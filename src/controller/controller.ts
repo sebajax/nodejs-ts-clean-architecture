@@ -10,7 +10,7 @@ import { logMessage, logger } from '../infraestructure/log/logger';
 /*
  * controller main class import all the controllers must extend this class
  */
-abstract class Controller {
+export abstract class Controller {
   public logger: Logger;
   public logMessage: ILogDomain;
   public schema?: ObjectSchema;
@@ -43,5 +43,3 @@ abstract class Controller {
     return null;
   }
 }
-
-export default Controller;

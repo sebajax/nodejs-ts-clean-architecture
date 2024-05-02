@@ -1,7 +1,7 @@
 // module import
 import Joi from 'joi';
 
-const addMessageSchema = Joi.object({
+export const addMessageSchema = Joi.object({
   text: Joi.string().min(1).required(),
   sender: Joi.string().email({ minDomainSegments: 2 }).max(100).required(),
   room: Joi.string().min(1).required(),
@@ -25,7 +25,7 @@ const addMessageSchema = Joi.object({
   }).required(),
 }).required();
 
-const getMessagesSchema = Joi.object({
+export const getMessagesSchema = Joi.object({
   // required fields
   page: Joi.number().integer().strict().required().min(1),
   // optional fields
@@ -33,5 +33,3 @@ const getMessagesSchema = Joi.object({
     sender: Joi.string().email({ minDomainSegments: 2 }).max(100),
   }),
 }).required();
-
-export { addMessageSchema, getMessagesSchema };

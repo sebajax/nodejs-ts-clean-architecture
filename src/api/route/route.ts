@@ -6,7 +6,7 @@ import userRoute from './user.route';
 // config import
 import { API_VERSION } from '../../infraestructure/config/environment.config';
 
-export default (app: Application) => {
+export const routes = (app: Application) => {
   app.use(`/${API_VERSION}/`, indexRoute);
   app.use(`/${API_VERSION}/user`, userRoute);
   // app.use(`/${API_VERSION}/message`, messageRoute);

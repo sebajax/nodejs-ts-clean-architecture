@@ -5,7 +5,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import path from 'path';
 import 'reflect-metadata';
-import routes from './api/route/route';
+import { routes } from './api/route/route';
 import { VERSION_NUMBER } from './infraestructure/config/environment.config';
 import { logger } from './infraestructure/log/logger';
 

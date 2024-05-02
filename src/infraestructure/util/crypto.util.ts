@@ -1,7 +1,7 @@
 // module imports
 import crypto, { BinaryToTextEncoding } from 'crypto';
 
-class CryptoUtil {
+export default class CryptoUtil {
   public static verifyHmac(hmac: string, hash: string): boolean {
     const providedHmac = Buffer.from(hmac, 'utf-8');
     const generatedHmac = Buffer.from(hash, 'utf-8');
@@ -35,5 +35,3 @@ class CryptoUtil {
       .digest(encoding || 'hex');
   }
 }
-
-export default CryptoUtil;

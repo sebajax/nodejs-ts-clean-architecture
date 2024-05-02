@@ -3,7 +3,7 @@
  */
 
 // response domain interface
-export default interface IResponseDomain {
+export interface IResponseDomain {
   error: boolean;
   message: string;
   code: number;

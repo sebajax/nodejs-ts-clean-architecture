@@ -1,7 +1,7 @@
 // module import
 import { StatusCodes } from 'http-status-codes';
 // domain import
-import IResponseDomain from '../../../domain/response.domain';
+import { IResponseDomain } from '../../../domain/response.domain';
 // interface import
 import { IAddUserResponse } from './addUser.service.interface';
 
