@@ -1,17 +1,9 @@
 // response import
 import { CREATED, INSERT_USER_ERROR, USER_EXISTS } from './addUser.response';
-// interface import
-import { IAddUserService } from './addUser.service.interface';
 // service import
 import AddUserService from './addUser.service';
-// dto import
-import { CreateUserDTO } from '../../../model/user/dto/createUser.dto';
-import { FindUserDTO } from '../../../model/user/dto/queryUser.dto';
 // domain import
 import { UserDomain } from '../../../domain/user.domain';
-
-// Mocking UserModel module
-jest.mock('../../../model/user/user.model');
 
 // test #AddUserService()
 describe('#AddUserService()', () => {
@@ -20,7 +12,7 @@ describe('#AddUserService()', () => {
 
   it('It should pass and return that the user was created successfully CREATED', async () => {
     // mock create user response
-    const userCreated = new CreateUserDTO(1, 'test@test.com');
+    const userCreated = { id: 1, email: 'test@test.com' };
 
     // mock model used methods
     const userModelMock = {
@@ -50,9 +42,9 @@ describe('#AddUserService()', () => {
     });
   });
 
-  it('It should not pass and return user already exists USER_EXISTS', async () => {
+  it('It should fail and return user already exists USER_EXISTS', async () => {
     // mock finded user response
-    const findedUser = new FindUserDTO(1, 'Test', 'test@test.com');
+    const findedUser = { id: 1, name: 'Test', email: 'test@test.com' };
 
     // mock model used methods
     const userModelMock = {
@@ -86,7 +78,7 @@ describe('#AddUserService()', () => {
     };
 
     // instance AddUserService class
-    const addUserService: IAddUserService = new AddUserService(userModelMock);
+    const addUserService = new AddUserService(userModelMock);
 
     // execute use case
     const result = await addUserService.addUser(user);
