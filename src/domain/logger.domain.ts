@@ -9,7 +9,7 @@ export interface ILogDomain {
 }
 
 // message domain interface
-export interface IMessageDomain {
+export interface ILogMessageDomain {
   requestMethod: string;
   controller: string;
   method?: string;

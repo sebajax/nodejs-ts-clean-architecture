@@ -17,7 +17,5 @@ export interface IUserModel {
 // get entity repository
 const userRepository = AppDataSource.getRepository(UserEntity);
 
-/*
- * model factory init
- */
+// model factory init
 export const userModel = new UserModel(userRepository);
