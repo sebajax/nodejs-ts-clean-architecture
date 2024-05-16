@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodejs-ts-clean-architecture
+spec:
+  selector:
+    app: nodejs-ts-clean-architecture
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-ts-clean-architecture-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodejs-ts-clean-architecture
+  template:
+    metadata:
+      labels:
+        app: nodejs-ts-clean-architecture
+    spec:
+      containers:
+        - name: nodejs-ts-clean-architecture-container
+          image: nodejs-ts-clean-architecture
+          ports:
+            - containerPort: 3000
