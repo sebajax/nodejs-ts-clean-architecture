@@ -2,8 +2,8 @@
 import { Logger } from 'winston';
 // domain import
 import { ILogDomain } from '../domain/logger.domain';
-// infraestructure import
-import { logMessage, logger } from '../infraestructure/log/logger';
+// infrastructure import
+import { logMessage, logger } from '../infrastructure/log/logger';
 
 /*
  * services main class import all the services must extend this class

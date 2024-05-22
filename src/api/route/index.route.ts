@@ -5,7 +5,7 @@ import {
   ReadinessEndpoint,
 } from '@cloudnative/health-connect';
 import express, { Request, Response } from 'express';
-import { VERSION_NUMBER } from '../../infraestructure/config/environment.config';
+import { VERSION_NUMBER } from '../../infrastructure/config/environment.config';
 
 const router = express.Router();
 const healthCheck = new HealthChecker();

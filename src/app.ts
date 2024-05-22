@@ -6,8 +6,8 @@ import morgan from 'morgan';
 import path from 'path';
 import 'reflect-metadata';
 import { routes } from './api/route/route';
-import { VERSION_NUMBER } from './infraestructure/config/environment.config';
-import { logger } from './infraestructure/log/logger';
+import { VERSION_NUMBER } from './infrastructure/config/environment.config';
+import { logger } from './infrastructure/log/logger';
 
 const app: Application = express();
 app.use(helmet());

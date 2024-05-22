@@ -2,7 +2,7 @@
 import { MessageModel } from './message.model';
 import { MessageEntity } from './message.model.entity';
 // db import
-import { AppDataSource } from '../../infraestructure/database/db';
+import { AppDataSource } from '../../infrastructure/database/db';
 // domain import
 import { MessageDomain } from '../../domain/message.domain';
 // dto import

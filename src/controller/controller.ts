@@ -2,10 +2,10 @@
 import { Logger } from 'winston';
 // domain import
 import { ILogDomain } from '../domain/logger.domain';
-// infraestructure import
+// infrastructure import
 import { StatusCodes } from 'http-status-codes';
 import { ObjectSchema } from 'joi';
-import { logMessage, logger } from '../infraestructure/log/logger';
+import { logMessage, logger } from '../infrastructure/log/logger';
 
 /*
  * controller main class import all the controllers must extend this class

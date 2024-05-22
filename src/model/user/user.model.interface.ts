@@ -2,7 +2,7 @@
 import { UserModel } from './user.model';
 import { UserEntity } from './user.model.entity';
 // db import
-import { AppDataSource } from '../../infraestructure/database/db';
+import { AppDataSource } from '../../infrastructure/database/db';
 // domain import
 import { UserDomain } from '../../domain/user.domain';
 // dto import
