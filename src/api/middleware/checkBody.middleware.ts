@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
-import { logMessage, logger } from '../../infraestructure/log/logger';
+import { logMessage, logger } from '../../infrastructure/log/logger';
 
 export const checkBodyMiddleware = (
   req: Request,
