@@ -1,8 +1,8 @@
 // module import
 import winston, { Logger } from 'winston';
 // domain import
-import { ILogDomain, ILogMessageDomain } from '../../domain/logger.domain';
-// infraestructure import
+import { ILogDomain, ILogMessageDomain } from '../../domains/logger.domain';
+// infrastructure import
 import {
   API_NAME,
   LOG_LEVEL,
@@ -13,7 +13,7 @@ import {
 const { colorize, combine, timestamp, json } = winston.format;
 
 /*
- * create a winston logger that streams to stackdriver logging
+ * create a winston logger that streams to stack driver logging
  * ogs will be written to: "projects/YOUR_PROJECT_ID/logs/winston_log"
  */
 const logger: Logger = winston.createLogger({
