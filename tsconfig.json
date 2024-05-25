@@ -1,6 +1,8 @@
 {
   "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
+    "lib": ["es6"],
+    "types": ["reflect-metadata"],
     "rootDir": "src",
     "outDir": "dist",
     "esModuleInterop": true,
