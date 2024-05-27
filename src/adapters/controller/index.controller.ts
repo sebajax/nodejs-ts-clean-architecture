@@ -1,1 +1,1 @@
-import './adapters/controller/user/user.controller';
+import './user/user.controller';

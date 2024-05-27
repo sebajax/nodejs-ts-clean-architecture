@@ -1,8 +1,9 @@
 // module import
 import { StatusCodes } from 'http-status-codes';
 // domain import
+import { IResponseErrorDomain } from '../../../domains/error.domain';
 import { IResponseDomain } from '../../../domains/response.domain';
-import { IGetUserResponse } from './getUser.interface';
+import { IGetUserResponse, ResponseGetUser } from './getUser.interface';
 // interface import
 
 /*
@@ -10,14 +11,14 @@ import { IGetUserResponse } from './getUser.interface';
  */
 
 // BAD_REQUEST
-const USER_NOT_EXISTS: IResponseDomain = {
+const USER_NOT_FOUND: IResponseErrorDomain = {
   error: true,
-  message: 'USER_EXISTS',
-  code: StatusCodes.BAD_REQUEST,
+  message: 'USER_NOT_FOUND',
+  code: StatusCodes.NOT_FOUND,
 };
 
 // INTERNAL_SERVER_ERROR
-const GET_USER_ERROR: IResponseDomain = {
+const GET_USER_ERROR: IResponseErrorDomain = {
   error: true,
   message: 'GET_USER_ERROR',
   code: StatusCodes.INTERNAL_SERVER_ERROR,
@@ -26,17 +27,17 @@ const GET_USER_ERROR: IResponseDomain = {
 /*
  * RETURN RESPONSE DOMAIN
  */
-const OK: IResponseDomain = {
+const OK: IResponseDomain<ResponseGetUser> = {
   error: false,
   message: 'OK',
   code: StatusCodes.OK,
 };
 
 // response to export with definition
-const addUserResponse: IGetUserResponse = {
-  USER_NOT_EXISTS,
+const getUserResponse: IGetUserResponse = {
+  USER_NOT_FOUND,
   GET_USER_ERROR,
   OK,
 };
 
-export { addUserResponse, GET_USER_ERROR, OK, USER_NOT_EXISTS };
+export { GET_USER_ERROR, getUserResponse, OK, USER_NOT_FOUND };

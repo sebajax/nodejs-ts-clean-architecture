@@ -7,43 +7,51 @@ import { IAddUserRequest } from '../../../adapters/controller/user/user.interfac
 import {
   IUserRepository,
   USER_REPOSITORY_TYPE,
-} from '../../../adapters/repository/user/user.repository.interface';
+} from '../../../adapters/repositories/user/user.repository.interface';
+import { ResponseErrorDomain } from '../../../domains/error.domain';
 import { UserDomain } from '../../../domains/user.domain';
 import {
   ILogger,
   LOGGER_TYPE,
 } from '../../../infrastructure/logging/logger.interface';
-import { GET_USER_TYPE, IGetUser } from '../getUser/getUser.interface';
-import { ADD_USER_TYPE, IAddUser, IAddUserResponse } from './addUser.interface';
+import { IAddUser, ResponseAddUser } from './addUser.interface';
+import { addUserResponse } from './addUser.response';
 
 @injectable()
 export class AddUser implements IAddUser {
   constructor(
     @inject(LOGGER_TYPE.Logger) private _logger: ILogger,
-    @inject(ADD_USER_TYPE.AddUserResponse) private _response: IAddUserResponse,
     @inject(USER_REPOSITORY_TYPE.UserRepository)
-    private _repository: IUserRepository,
-    @inject(GET_USER_TYPE.GetUser) private _getUser: IGetUser
+    private _repository: IUserRepository
+    // @inject(GET_USER_TYPE.GetUser) private _getUser: IGetUser
   ) {}
 
-  public async execute(userRequest: IAddUserRequest): Promise<ResponseDomain> {
+  public async execute(
+    userRequest: IAddUserRequest
+  ): Promise<ResponseDomain<ResponseAddUser> | ResponseErrorDomain> {
     try {
+      // destructure the request data
+      const { name, email } = userRequest;
+
+      /*
       // check that email does not exist
-      // check if is a valid user using user model
-      const { data: user } = await this._getUser.execute(userRequest);
+      const checkUser: ResponseDomain<ResponseGetUser> =
+        await this._getUser.execute(email);
+      */
 
       // generate user domain instance
-      const userDomain = new UserDomain(user.name, user.name);
+      const userDomain = new UserDomain(name, email);
+
+      console.log(userDomain);
 
       // creating a new user
       const createdUser = await this._repository.createUser(userDomain);
 
       // if all the process was successfully we return an OK status
-      return new ResponseDomain(this._response.CREATED, createdUser);
+      return new ResponseDomain(addUserResponse.CREATED, createdUser);
     } catch (error) {
-      //this.logger.error(`${AddUser.name} error ${error}`);
-      console.error(`${AddUser.name} error ${error}`);
-      return this._response.INSERT_USER_ERROR;
+      this._logger.error(`${AddUser.name} error ${error}`);
+      throw new ResponseErrorDomain(addUserResponse.INSERT_USER_ERROR);
     }
   }
 }
