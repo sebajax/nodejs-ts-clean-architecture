@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class UserEntity {
+class UserEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -34,3 +34,5 @@ export class UserEntity {
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
   updatedAt: Date;
 }
+
+export { UserEntity };

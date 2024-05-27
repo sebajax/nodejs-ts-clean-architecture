@@ -7,7 +7,6 @@ import { QueryUserDto } from './dto/queryUser.dto';
 // User Repository DI identifiers
 export const USER_REPOSITORY_TYPE = {
   UserRepository: Symbol.for('UserRepository'),
-  UserRepositoryOrm: Symbol.for('UserRepositoryOrm'),
 };
 
 // User Repository interface

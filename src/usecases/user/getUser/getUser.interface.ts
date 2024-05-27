@@ -1,24 +1,38 @@
 // domain import
 import {
+  IResponseErrorDomain,
+  ResponseErrorDomain,
+} from '../../../domains/error.domain';
+import {
   IResponseDomain,
   ResponseDomain,
 } from '../../../domains/response.domain';
-import { UserDomain } from '../../../domains/user.domain';
 
 // GetUser DI identifiers
-export const GET_USER_TYPE = {
-  GetUser: Symbol.for('UserRepository'),
+const GET_USER_TYPE = {
+  GetUser: Symbol.for('GetUser'),
   GetUserResponse: Symbol.for('GetUserResponse'),
 };
 
+// response type for the use case
+type ResponseGetUser = {
+  id: number;
+  name: string;
+  email: string;
+};
+
 // for GetUser response domain
-export interface IGetUserResponse {
-  USER_NOT_EXISTS: IResponseDomain;
-  GET_USER_ERROR: IResponseDomain;
-  OK: IResponseDomain;
+interface IGetUserResponse {
+  USER_NOT_FOUND: IResponseErrorDomain;
+  GET_USER_ERROR: IResponseErrorDomain;
+  OK: IResponseDomain<ResponseGetUser>;
 }
 
 // interface to implement the use case
-export interface IGetUser {
-  execute(user: UserDomain): Promise<ResponseDomain>;
+interface IGetUser {
+  execute(
+    email: string
+  ): Promise<ResponseDomain<ResponseGetUser> | ResponseErrorDomain>;
 }
+
+export { GET_USER_TYPE, IGetUser, IGetUserResponse, ResponseGetUser };

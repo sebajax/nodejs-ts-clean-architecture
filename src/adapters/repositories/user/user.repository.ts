@@ -15,16 +15,16 @@ import { UserDomain } from '../../../domains/user.domain';
 
 @injectable()
 export class UserRepository implements IUserRepository {
-  private _userRepository: Repository<UserEntity>;
-
-  public constructor(
-    @inject(Repository<UserEntity>) userRepository: Repository<UserEntity>
-  ) {
-    this._userRepository = userRepository;
-  }
+  constructor(
+    @inject(Repository<UserEntity>)
+    private _userRepository: Repository<UserEntity>
+  ) {}
 
   public async createUser(user: UserDomain): Promise<CreateUserDto> {
-    const createdUser = await this._userRepository.save(user);
+    // Create a new UserEntity instance
+    const userEntity = this._userRepository.create(user);
+    // Save the UserEntity instance
+    const createdUser = await this._userRepository.save(userEntity);
     return plainToClass(CreateUserDto, createdUser, {
       excludeExtraneousValues: true,
     });

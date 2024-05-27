@@ -1,8 +1,6 @@
 // module import
-import { DataSource } from 'typeorm';
-// logger import
 import { join } from 'path';
-import { logger } from '../logging/logger_old';
+import { DataSource } from 'typeorm';
 
 /**
  * create a connection to the database
@@ -15,7 +13,12 @@ export const AppDataSource = new DataSource({
   password: `${process.env.DB_PASSWORD}`,
   database: `${process.env.DB_NAME}`,
   migrations: [join(__dirname, './migration/*{.ts,.js}')],
-  entities: [join(__dirname, '../../model/**/*.model.entity{.ts,.js}')],
+  entities: [
+    join(
+      __dirname,
+      '../../adapters/repositories/**/*.repository.entity{.ts,.js}'
+    ),
+  ],
   synchronize: false,
   logging: true,
 });
@@ -23,9 +26,9 @@ export const AppDataSource = new DataSource({
 (async () => {
   try {
     await AppDataSource.initialize();
-    logger.info('connection to database has been established successfully.');
+    console.info('connection to database has been established successfully.');
     await AppDataSource.runMigrations();
   } catch (error) {
-    logger.error(`unable to connect to the database: ${error}`);
+    console.error(`unable to connect to the database: ${error}`);
   }
 })();

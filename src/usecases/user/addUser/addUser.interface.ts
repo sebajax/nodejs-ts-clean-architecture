@@ -1,24 +1,39 @@
 // domain import
 import {
+  IResponseErrorDomain,
+  ResponseErrorDomain,
+} from '../../../domains/error.domain';
+import {
   IResponseDomain,
   ResponseDomain,
 } from '../../../domains/response.domain';
 import { UserDomain } from '../../../domains/user.domain';
 
 // AddUser DI identifiers
-export const ADD_USER_TYPE = {
-  AddUser: Symbol.for('UserRepository'),
+const ADD_USER_TYPE = {
+  AddUser: Symbol.for('AddUser'),
   AddUserResponse: Symbol.for('AddUserResponse'),
 };
 
+// response type for the use case
+type ResponseAddUser = {
+  id: number;
+  name: string;
+  email: string;
+};
+
 // for AddUser response domain
-export interface IAddUserResponse {
-  USER_EXISTS: IResponseDomain;
-  INSERT_USER_ERROR: IResponseDomain;
-  CREATED: IResponseDomain;
+interface IAddUserResponse {
+  USER_EXISTS: IResponseErrorDomain;
+  INSERT_USER_ERROR: IResponseErrorDomain;
+  CREATED: IResponseDomain<ResponseAddUser>;
 }
 
 // interface to implement the use case
-export interface IAddUser {
-  execute(user: UserDomain): Promise<ResponseDomain>;
+interface IAddUser {
+  execute(
+    user: UserDomain
+  ): Promise<ResponseDomain<ResponseAddUser> | ResponseErrorDomain>;
 }
+
+export { ADD_USER_TYPE, IAddUser, IAddUserResponse, ResponseAddUser };

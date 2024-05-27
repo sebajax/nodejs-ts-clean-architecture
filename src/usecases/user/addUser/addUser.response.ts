@@ -3,12 +3,13 @@ import { StatusCodes } from 'http-status-codes';
 // domain import
 import { IResponseDomain } from '../../../domains/response.domain';
 // interface import
-import { IAddUserResponse } from './addUser.interface';
+import { IResponseErrorDomain } from '../../../domains/error.domain';
+import { IAddUserResponse, ResponseAddUser } from './addUser.interface';
 
 /*
  * BAD_REQUEST
  */
-const USER_EXISTS: IResponseDomain = {
+const USER_EXISTS: IResponseErrorDomain = {
   error: true,
   message: 'USER_EXISTS',
   code: StatusCodes.BAD_REQUEST,
@@ -17,7 +18,7 @@ const USER_EXISTS: IResponseDomain = {
 /*
  * INTERNAL_SERVER_ERROR
  */
-const INSERT_USER_ERROR: IResponseDomain = {
+const INSERT_USER_ERROR: IResponseErrorDomain = {
   error: true,
   message: 'INSERT_USER_ERROR',
   code: StatusCodes.INTERNAL_SERVER_ERROR,
@@ -26,7 +27,7 @@ const INSERT_USER_ERROR: IResponseDomain = {
 /*
  * CREATED
  */
-const CREATED: IResponseDomain = {
+const CREATED: IResponseDomain<ResponseAddUser> = {
   error: false,
   message: 'USER_CREATED',
   code: StatusCodes.CREATED,
