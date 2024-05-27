@@ -29,29 +29,22 @@ export class AddUser implements IAddUser {
   public async execute(
     userRequest: IAddUserRequest
   ): Promise<ResponseDomain<ResponseAddUser> | ResponseErrorDomain> {
-    try {
-      // destructure the request data
-      const { name, email } = userRequest;
+    // destructure the request data
+    const { name, email } = userRequest;
 
-      /*
-      // check that email does not exist
-      const checkUser: ResponseDomain<ResponseGetUser> =
-        await this._getUser.execute(email);
-      */
-
-      // generate user domain instance
-      const userDomain = new UserDomain(name, email);
-
-      console.log(userDomain);
-
-      // creating a new user
-      const createdUser = await this._repository.createUser(userDomain);
-
-      // if all the process was successfully we return an OK status
-      return new ResponseDomain(addUserResponse.CREATED, createdUser);
-    } catch (error) {
-      this._logger.error(`${AddUser.name} error ${error}`);
-      throw new ResponseErrorDomain(addUserResponse.INSERT_USER_ERROR);
+    // check that email does not exist
+    const checkUser = await this._repository.findUser(email);
+    if (checkUser !== null) {
+      throw new ResponseErrorDomain(addUserResponse.USER_EXISTS);
     }
+
+    // generate user domain instance
+    const userDomain = new UserDomain(name, email);
+
+    // creating a new user
+    const createdUser = await this._repository.createUser(userDomain);
+
+    // if all the process was successfully we return an OK status
+    return new ResponseDomain(addUserResponse.CREATED, createdUser);
   }
 }
