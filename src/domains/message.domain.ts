@@ -2,34 +2,34 @@
  * message domain
  */
 
-export type MessageDetail = {
+type TypeMessageDetail = {
   token: string;
   riskId: number;
 };
 
 // message domain interface
-export interface IMessageDomain {
+interface IMessageDomain {
   text: string;
   sender: string;
   room: string;
-  topScore: MessageDetail;
-  details: MessageDetail[];
+  topScore: TypeMessageDetail;
+  details: TypeMessageDetail[];
 }
 
 // message domain class
-export class MessageDomain implements IMessageDomain {
+class MessageDomain implements IMessageDomain {
   text: string;
   sender: string;
   room: string;
-  topScore: MessageDetail;
-  details: MessageDetail[];
+  topScore: TypeMessageDetail;
+  details: TypeMessageDetail[];
 
   constructor(
     text: string,
     sender: string,
     room: string,
-    topScore: MessageDetail,
-    details: MessageDetail[]
+    topScore: TypeMessageDetail,
+    details: TypeMessageDetail[]
   ) {
     this.text = text;
     this.sender = sender;
@@ -38,3 +38,5 @@ export class MessageDomain implements IMessageDomain {
     this.details = details;
   }
 }
+
+export { IMessageDomain, MessageDomain, TypeMessageDetail };

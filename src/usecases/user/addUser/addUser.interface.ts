@@ -20,5 +20,5 @@ export interface IAddUserResponse {
 
 // interface to implement the use case
 export interface IAddUser {
-  addUser(user: UserDomain): Promise<ResponseDomain>;
+  execute(user: UserDomain): Promise<ResponseDomain>;
 }
