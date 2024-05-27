@@ -2,10 +2,11 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { inject, injectable } from 'inversify';
+import { ResponseErrorDomain } from '../../domains/error.domain';
 import { ILogger, LOGGER_TYPE } from '../logging/logger.interface';
 
 @injectable()
-export class LoggingMiddleware {
+class LoggingMiddleware {
   constructor(@inject(LOGGER_TYPE.Logger) private _logger: ILogger) {}
 
   // This middleware will each incoming request executed
@@ -22,7 +23,7 @@ export class LoggingMiddleware {
 
   // This middleware will send and error if execution was not successful
   public logError(
-    err: unknown,
+    err: ResponseErrorDomain,
     req: Request,
     res: Response,
     _next: NextFunction
@@ -33,8 +34,22 @@ export class LoggingMiddleware {
       body: req.body,
       params: req.params,
       query: req.query,
-      error: err,
     });
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json('INTERNAL_SERVER_ERROR');
+    try {
+      // Handle specific errors
+      if (err instanceof ResponseErrorDomain) {
+        const { error, message, code } = err;
+        this._logger.error('ResponseErrorDomain', { error, message, code });
+        res.status(err.code).json({ error, message, code });
+      }
+    } catch {
+      // Handle other types of errors
+      this._logger.error('Internal Server Error', err);
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json('INTERNAL SERVER ERROR');
+    }
   }
 }
+
+export { LoggingMiddleware };
