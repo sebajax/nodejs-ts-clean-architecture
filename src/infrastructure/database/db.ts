@@ -2,7 +2,7 @@
 import { DataSource } from 'typeorm';
 // logger import
 import { join } from 'path';
-import { logger } from '../log/logger';
+import { logger } from '../logging/logger_old';
 
 /**
  * create a connection to the database

@@ -3,13 +3,13 @@
  */
 
 // user domain interface
-export interface IUserDomain {
+interface IUserDomain {
   name: string;
   email: string;
 }
 
 // user domain class
-export class UserDomain implements IUserDomain {
+class UserDomain implements IUserDomain {
   name: string;
   email: string;
 
@@ -18,3 +18,5 @@ export class UserDomain implements IUserDomain {
     this.email = email;
   }
 }
+
+export { IUserDomain, UserDomain };

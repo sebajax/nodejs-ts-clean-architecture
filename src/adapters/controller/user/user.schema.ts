@@ -1,7 +1,11 @@
 // module import
 import Joi from 'joi';
+// interface import
+import { IAddUserRequest } from './user.interface';
 
-export const addUserSchema = Joi.object({
+const addUserSchema = Joi.object<IAddUserRequest>({
   name: Joi.string().min(1).required(),
   email: Joi.string().email({ minDomainSegments: 2 }).max(100).required(),
 }).required();
+
+export { addUserSchema };

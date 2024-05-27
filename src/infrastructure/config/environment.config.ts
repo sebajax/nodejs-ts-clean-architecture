@@ -9,15 +9,7 @@ const CLEAN_ARCHITECTURE_API: string = process.env.CLEAN_ARCHITECTURE_API
   ? process.env.CLEAN_ARCHITECTURE_API
   : 'http://localhost:8080/v1';
 
-export default Object.freeze({
-  VERSION_NUMBER,
-  NODE_ENV,
-  API_NAME,
-  LOG_LEVEL,
-  API_VERSION,
-});
-
-export interface IEnvironmentConfig {
+interface IEnvironmentConfig {
   VERSION_NUMBER: string;
   NODE_ENV: string | undefined;
   API_NAME: string | undefined;
@@ -26,7 +18,7 @@ export interface IEnvironmentConfig {
   CLEAN_ARCHITECTURE_API: string;
 }
 
-export const environmentConfig: IEnvironmentConfig = {
+const environmentConfig: IEnvironmentConfig = {
   VERSION_NUMBER: VERSION_NUMBER,
   NODE_ENV: NODE_ENV,
   API_NAME: API_NAME,
@@ -35,4 +27,12 @@ export const environmentConfig: IEnvironmentConfig = {
   CLEAN_ARCHITECTURE_API: CLEAN_ARCHITECTURE_API,
 };
 
-export { API_NAME, API_VERSION, LOG_LEVEL, NODE_ENV, VERSION_NUMBER };
+export {
+  API_NAME,
+  API_VERSION,
+  IEnvironmentConfig,
+  LOG_LEVEL,
+  NODE_ENV,
+  VERSION_NUMBER,
+  environmentConfig,
+};

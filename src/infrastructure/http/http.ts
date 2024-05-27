@@ -6,7 +6,7 @@ import { Logger } from 'winston';
 import { ILogDomain } from '../../domains/logger.domain';
 import { IResponseDomain, ResponseDomain } from '../../domains/response.domain';
 // infrastructure import
-import { logMessage, logger } from '../../infrastructure/log/logger';
+import { logMessage, logger } from '../logging/logger_old';
 
 /*
  * Http main class for fetching data from external services
