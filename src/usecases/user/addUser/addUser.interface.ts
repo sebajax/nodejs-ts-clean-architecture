@@ -1,4 +1,5 @@
 // Domain import
+import { IAddUserRequest } from '../../../adapters/controller/user/user.interface';
 import {
   IResponseErrorDomain,
   ResponseErrorDomain,
@@ -7,7 +8,6 @@ import {
   IResponseDomain,
   ResponseDomain,
 } from '../../../domains/response.domain';
-import { UserDomain } from '../../../domains/user.domain';
 
 // AddUser DI identifiers
 const ADD_USER_TYPE = {
@@ -32,7 +32,7 @@ interface IAddUserResponse {
 // Interface to implement the use case
 interface IAddUser {
   execute(
-    user: UserDomain
+    userRequest: IAddUserRequest
   ): Promise<ResponseDomain<ResponseAddUser> | ResponseErrorDomain>;
 }
 

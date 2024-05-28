@@ -1,8 +1,8 @@
 // Module import
 import { ContainerModule } from 'inversify';
-// logger import
+// Logger import
 import { Logger } from '../logging/logger';
-// interface import
+// Interface import
 import { ILogger, LOGGER_TYPE } from '../logging/logger.interface';
 
 // Bind Logger

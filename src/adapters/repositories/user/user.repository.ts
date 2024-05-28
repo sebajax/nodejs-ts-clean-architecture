@@ -19,21 +19,21 @@ import { UserDomain } from '../../../domains/user.domain';
 class UserRepository implements IUserRepository {
   constructor(
     @inject(USER_REPOSITORY_TYPE.UserRepositoryEntity)
-    private readonly _userRepository: Repository<UserEntity>
+    private readonly _repository: Repository<UserEntity>
   ) {}
 
   public async createUser(user: UserDomain): Promise<CreateUserDto> {
     // Create a new UserEntity instance
-    const userEntity = this._userRepository.create(user);
+    const userEntity = this._repository.create(user);
     // Save the UserEntity instance
-    const createdUser = await this._userRepository.save(userEntity);
+    const createdUser = await this._repository.save(userEntity);
     return plainToClass(CreateUserDto, createdUser, {
       excludeExtraneousValues: true,
     });
   }
 
   public async findUser(email: string): Promise<QueryUserDto | null> {
-    const user = await this._userRepository.findOne({
+    const user = await this._repository.findOne({
       where: {
         email,
       },
