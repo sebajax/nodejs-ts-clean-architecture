@@ -37,20 +37,20 @@ class LoggingMiddleware {
       params: req.params,
       query: req.query,
     });
-    try {
-      // Handle specific errors
-      if (err instanceof ResponseErrorDomain) {
-        const { error, message, code } = err;
-        this._logger.error('ResponseErrorDomain', { error, message, code });
-        res.status(err.code).json({ error, message, code });
-      }
-    } catch {
-      // Handle other types of errors
-      this._logger.error('Internal Server Error', err);
-      res
-        .status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json('INTERNAL SERVER ERROR');
+
+    // Handle specific errors
+    if (err instanceof ResponseErrorDomain) {
+      const { error, message, code } = err;
+      this._logger.error('ResponseErrorDomain', { error, message, code });
+      res.status(err.code).json({ error, message, code });
     }
+    // Handle other types of errors
+    this._logger.error('Internal Server Error', err);
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      error: true,
+      message: 'INTERNAL_SERVER_ERROR',
+      code: StatusCodes.INTERNAL_SERVER_ERROR,
+    });
   }
 }
 
