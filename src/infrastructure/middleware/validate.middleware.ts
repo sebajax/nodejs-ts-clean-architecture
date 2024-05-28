@@ -26,7 +26,7 @@ class ValidationMiddleware {
 
         return res
           .status(StatusCodes.BAD_REQUEST)
-          .send({ error: true, message: error.details[0].message });
+          .json({ error: true, message: error.details[0].message });
       }
       return next();
     };

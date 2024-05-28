@@ -1,6 +1,6 @@
 // Module import
 import { ContainerModule } from 'inversify';
-// middleware import
+// Middleware import
 import { LoggingMiddleware } from '../middleware/logging.middleware';
 import { ValidationMiddleware } from '../middleware/validate.middleware';
 

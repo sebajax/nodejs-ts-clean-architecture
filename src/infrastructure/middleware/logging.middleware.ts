@@ -24,12 +24,7 @@ class LoggingMiddleware {
   }
 
   // This middleware will send and error if execution was not successful
-  public logError(
-    err: ResponseErrorDomain,
-    req: Request,
-    res: Response,
-    _next: NextFunction
-  ): void {
+  public logError(err: ResponseErrorDomain, req: Request, res: Response): void {
     this._logger.error('Error processing request', {
       method: req.method,
       url: req.url,
@@ -37,29 +32,20 @@ class LoggingMiddleware {
       params: req.params,
       query: req.query,
     });
-    try {
-      // Handle specific errors
-      if (err instanceof ResponseErrorDomain) {
-        const { error, message, code } = err;
-        this._logger.error('ResponseErrorDomain', { error, message, code });
-        res.status(err.code).json({ error, message, code });
-      }
-      // Handle other types of errors
-      this._logger.error('Internal Server Error', err);
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-        error: true,
-        message: 'INTERNAL_SERVER_ERROR',
-        code: StatusCodes.INTERNAL_SERVER_ERROR,
-      });
-    } catch (error) {
-      // Handle other types of errors
-      this._logger.error('Internal Server Error', error);
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-        error: true,
-        message: 'INTERNAL_SERVER_ERROR',
-        code: StatusCodes.INTERNAL_SERVER_ERROR,
-      });
+
+    // Handle specific errors
+    if (err instanceof ResponseErrorDomain) {
+      const { error, message, code } = err;
+      this._logger.error('ResponseErrorDomain', { error, message, code });
+      res.status(err.code).json({ error, message, code });
     }
+    // Handle other types of errors
+    this._logger.error('Internal Server Error', err);
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      error: true,
+      message: 'INTERNAL_SERVER_ERROR',
+      code: StatusCodes.INTERNAL_SERVER_ERROR,
+    });
   }
 }
 
