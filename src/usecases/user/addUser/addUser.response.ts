@@ -1,8 +1,8 @@
-// module import
+// Module import
 import { StatusCodes } from 'http-status-codes';
-// domain import
+// Domain import
 import { IResponseDomain } from '../../../domains/response.domain';
-// interface import
+// Interface import
 import { IResponseErrorDomain } from '../../../domains/error.domain';
 import { IAddUserResponse, ResponseAddUser } from './addUser.interface';
 
@@ -33,7 +33,7 @@ const CREATED: IResponseDomain<ResponseAddUser> = {
   code: StatusCodes.CREATED,
 };
 
-// response to export with definition
+// Response to export with definition
 const addUserResponse: IAddUserResponse = {
   USER_EXISTS,
   INSERT_USER_ERROR,

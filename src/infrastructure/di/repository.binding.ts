@@ -1,11 +1,14 @@
+// Module import
 import { ContainerModule } from 'inversify';
 import { Repository } from 'typeorm';
+// Repository import
 import { UserRepository } from '../../adapters/repositories/user/user.repository';
 import { UserEntity } from '../../adapters/repositories/user/user.repository.entity';
 import {
   IUserRepository,
   USER_REPOSITORY_TYPE,
 } from '../../adapters/repositories/user/user.repository.interface';
+// Database import
 import { AppDataSource } from '../database/db';
 
 // Bind Repository

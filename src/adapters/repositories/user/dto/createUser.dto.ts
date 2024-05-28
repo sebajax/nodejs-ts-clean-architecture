@@ -1,9 +1,8 @@
+// Module import
 import { Expose } from 'class-transformer';
 
-/*
- * create a new user dto
- */
-export class CreateUserDto {
+// Create a new user dto helper for db response
+class CreateUserDto {
   @Expose()
   id: number;
   @Expose()
@@ -11,3 +10,5 @@ export class CreateUserDto {
   @Expose()
   email: string;
 }
+
+export { CreateUserDto };

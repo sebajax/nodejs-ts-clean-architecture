@@ -1,4 +1,4 @@
-// domain import
+// Domain import
 import {
   IResponseErrorDomain,
   ResponseErrorDomain,
@@ -15,21 +15,21 @@ const ADD_USER_TYPE = {
   AddUserResponse: Symbol.for('AddUserResponse'),
 };
 
-// response type for the use case
+// Response type for the use case
 type ResponseAddUser = {
   id: number;
   name: string;
   email: string;
 };
 
-// for AddUser response domain
+// For AddUser response domain
 interface IAddUserResponse {
   USER_EXISTS: IResponseErrorDomain;
   INSERT_USER_ERROR: IResponseErrorDomain;
   CREATED: IResponseDomain<ResponseAddUser>;
 }
 
-// interface to implement the use case
+// Interface to implement the use case
 interface IAddUser {
   execute(
     user: UserDomain

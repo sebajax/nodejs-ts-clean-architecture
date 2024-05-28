@@ -1,9 +1,8 @@
+// Module import
 import { Expose } from 'class-transformer';
 
-/*
- * query user dto
- */
-export class QueryUserDto {
+// Query user dto helper for db response
+class QueryUserDto {
   @Expose()
   id: number;
   @Expose()
@@ -15,3 +14,5 @@ export class QueryUserDto {
   @Expose()
   updatedAt: Date;
 }
+
+export { QueryUserDto };

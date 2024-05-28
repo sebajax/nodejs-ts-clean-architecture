@@ -1,14 +1,10 @@
-/*
- * user domain
- */
-
-// user domain interface
+// User domain interface
 interface IUserDomain {
   name: string;
   email: string;
 }
 
-// user domain class
+// User domain class
 class UserDomain implements IUserDomain {
   name: string;
   email: string;

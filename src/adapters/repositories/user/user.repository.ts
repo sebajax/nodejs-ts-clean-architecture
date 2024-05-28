@@ -1,23 +1,22 @@
-// di import
-import { inject, injectable } from 'inversify';
-// module import
+// Module import
 import { plainToClass } from 'class-transformer';
+import { inject, injectable } from 'inversify';
 import { Repository } from 'typeorm';
-// interface import
+// Interface import
 import { IUserRepository } from './user.repository.interface';
-// entity import
+// Entity import
 import { UserEntity } from './user.repository.entity';
-// dto import
+// Dto import
 import { CreateUserDto } from './dto/createUser.dto';
 import { QueryUserDto } from './dto/queryUser.dto';
-// domain import
+// Domain import
 import { UserDomain } from '../../../domains/user.domain';
 
 @injectable()
-export class UserRepository implements IUserRepository {
+class UserRepository implements IUserRepository {
   constructor(
     @inject(Repository<UserEntity>)
-    private _userRepository: Repository<UserEntity>
+    private readonly _userRepository: Repository<UserEntity>
   ) {}
 
   public async createUser(user: UserDomain): Promise<CreateUserDto> {
@@ -46,3 +45,5 @@ export class UserRepository implements IUserRepository {
     return null;
   }
 }
+
+export { UserRepository };

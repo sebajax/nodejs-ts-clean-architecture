@@ -1,13 +1,15 @@
-// module import
+// Module import
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { inject, injectable } from 'inversify';
+// Domain import
 import { ResponseErrorDomain } from '../../domains/error.domain';
+// Interface import
 import { ILogger, LOGGER_TYPE } from '../logging/logger.interface';
 
 @injectable()
 class LoggingMiddleware {
-  constructor(@inject(LOGGER_TYPE.Logger) private _logger: ILogger) {}
+  constructor(@inject(LOGGER_TYPE.Logger) private readonly _logger: ILogger) {}
 
   // This middleware will each incoming request executed
   public logRequest(req: Request, _res: Response, next: NextFunction): void {

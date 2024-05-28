@@ -1,16 +1,16 @@
-// module import
+// Module import
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { inject, injectable } from 'inversify';
 import { ObjectSchema } from 'joi';
+// Interface import
 import { ILogger, LOGGER_TYPE } from '../logging/logger.interface';
-// infrastructure import
 
 @injectable()
-export class ValidationMiddleware {
+class ValidationMiddleware {
   constructor(@inject(LOGGER_TYPE.Logger) private _logger: ILogger) {}
 
-  // this middleware function will validate the request body using a joi schema
+  // This middleware function will validate the request body using a joi schema
   public validate(schema: ObjectSchema) {
     return (req: Request, res: Response, next: NextFunction) => {
       const { error } = schema.validate(req.body);
@@ -32,3 +32,5 @@ export class ValidationMiddleware {
     };
   }
 }
+
+export { ValidationMiddleware };

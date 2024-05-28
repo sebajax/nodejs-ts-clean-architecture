@@ -1,4 +1,6 @@
+// Module import
 import { ContainerModule } from 'inversify';
+// Use Case import
 import { AddUser } from '../../usecases/user/addUser/addUser';
 import {
   ADD_USER_TYPE,

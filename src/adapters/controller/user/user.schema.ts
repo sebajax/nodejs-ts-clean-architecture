@@ -1,6 +1,6 @@
-// module import
+// Module import
 import Joi from 'joi';
-// interface import
+// Interface import
 import { IAddUserRequest } from './user.interface';
 
 const addUserSchema = Joi.object<IAddUserRequest>({

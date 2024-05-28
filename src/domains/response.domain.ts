@@ -1,7 +1,3 @@
-/*
- * Response domain
- */
-
 // Response domain interface
 interface IResponseDomain<T> {
   error: boolean;
