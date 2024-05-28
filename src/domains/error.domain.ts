@@ -1,15 +1,11 @@
-/*
- * response error domain
- */
-
-// response error domain interface
+// Response error domain interface
 interface IResponseErrorDomain extends Partial<Error> {
   error: boolean;
   message: string;
   code: number;
 }
 
-// response error domain class
+// Response error domain class
 class ResponseErrorDomain extends Error implements IResponseErrorDomain {
   error: boolean;
   message: string;

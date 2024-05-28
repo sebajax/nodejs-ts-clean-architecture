@@ -1,4 +1,4 @@
-// module import
+// Module import
 import { Request, Response } from 'express';
 import { inject } from 'inversify';
 import {
@@ -7,24 +7,25 @@ import {
   request,
   response,
 } from 'inversify-express-utils';
-// domain import
+// Domain import
 import { IResponseDomain } from '../../../domains/response.domain';
-// infrastructure import
+// Infrastructure import
 import { ValidationMiddleware } from '../../../infrastructure/middleware/validate.middleware';
-// use case import
+// Use case import
 import {
   ADD_USER_TYPE,
   IAddUser,
   ResponseAddUser,
 } from '../../../usecases/user/addUser/addUser.interface';
-// schema import
+// Interface import
 import { IAddUserRequest } from './user.interface';
+// Schema import
 import { addUserSchema } from './user.schema';
 
 @controller('/user')
-export class UserController {
+class UserController {
   public constructor(
-    @inject(ADD_USER_TYPE.AddUser) private _addUser: IAddUser
+    @inject(ADD_USER_TYPE.AddUser) private readonly _addUser: IAddUser
   ) {}
 
   @httpPost('/', ValidationMiddleware.prototype.validate(addUserSchema))
@@ -32,13 +33,15 @@ export class UserController {
     @request() req: Request,
     @response() res: Response
   ): Promise<void> {
-    // cast validated body into a user Domain instance
+    // Cast validated body into a user Domain instance
     const user = req.body as unknown as IAddUserRequest; // Type assertion
 
-    // call the use case
+    // Call the use case
     const { error, message, code, data }: IResponseDomain<ResponseAddUser> =
       await this._addUser.execute(user);
 
     res.status(code).json({ error, message, data });
   }
 }
+
+export { UserController };

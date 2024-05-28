@@ -1,4 +1,4 @@
-// module import
+// Module import
 import {
   Column,
   CreateDateColumn,

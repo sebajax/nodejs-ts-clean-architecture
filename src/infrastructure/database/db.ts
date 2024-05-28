@@ -1,11 +1,9 @@
-// module import
+// Module import
 import { join } from 'path';
 import { DataSource } from 'typeorm';
 
-/**
- * create a connection to the database
- */
-export const AppDataSource = new DataSource({
+// Create a connection to the database
+const AppDataSource = new DataSource({
   type: 'postgres',
   host: `${process.env.DB_HOST}`,
   port: parseInt(`${process.env.DB_PORT}`),
@@ -26,9 +24,11 @@ export const AppDataSource = new DataSource({
 (async () => {
   try {
     await AppDataSource.initialize();
-    console.info('connection to database has been established successfully.');
+    console.info('Connection to database has been established successfully.');
     await AppDataSource.runMigrations();
   } catch (error) {
-    console.error(`unable to connect to the database: ${error}`);
+    console.error(`Unable to connect to the database: ${error}`);
   }
 })();
+
+export { AppDataSource };

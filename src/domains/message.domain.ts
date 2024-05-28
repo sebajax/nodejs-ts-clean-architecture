@@ -1,13 +1,9 @@
-/*
- * message domain
- */
-
 type TypeMessageDetail = {
   token: string;
   riskId: number;
 };
 
-// message domain interface
+// Message domain interface
 interface IMessageDomain {
   text: string;
   sender: string;
@@ -16,7 +12,7 @@ interface IMessageDomain {
   details: TypeMessageDetail[];
 }
 
-// message domain class
+// Message domain class
 class MessageDomain implements IMessageDomain {
   text: string;
   sender: string;

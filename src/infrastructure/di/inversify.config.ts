@@ -1,4 +1,6 @@
+// Module import
 import { Container } from 'inversify';
+// Binding import
 import { loggerBinding } from './logger.binding';
 import { middlewareBinding } from './middlewares.binding';
 import { repositoryBinding } from './repository.binding';

@@ -1,14 +1,17 @@
+// Module import
 import { injectable } from 'inversify';
 import winston from 'winston';
+// Config import
 import {
   API_NAME,
   LOG_LEVEL,
   VERSION_NUMBER,
 } from '../config/environment.config';
+// Interface import
 import { ILogger } from './logger.interface';
 
 @injectable()
-export class Logger implements ILogger {
+class Logger implements ILogger {
   private logger: winston.Logger;
 
   constructor() {
@@ -44,3 +47,5 @@ export class Logger implements ILogger {
     this.logger.error(message, meta);
   }
 }
+
+export { Logger };

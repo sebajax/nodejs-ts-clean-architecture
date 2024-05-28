@@ -1,50 +1,54 @@
-// di import
+// Module import
 import { inject, injectable } from 'inversify';
-// domain import
+// Domain import
+import { ResponseErrorDomain } from '../../../domains/error.domain';
 import { ResponseDomain } from '../../../domains/response.domain';
-// interface import
+import { UserDomain } from '../../../domains/user.domain';
+// Interface import
 import { IAddUserRequest } from '../../../adapters/controller/user/user.interface';
+import { IAddUser, ResponseAddUser } from './addUser.interface';
+// Repository import
 import {
   IUserRepository,
   USER_REPOSITORY_TYPE,
 } from '../../../adapters/repositories/user/user.repository.interface';
-import { ResponseErrorDomain } from '../../../domains/error.domain';
-import { UserDomain } from '../../../domains/user.domain';
+// Infrastructure import
 import {
   ILogger,
   LOGGER_TYPE,
 } from '../../../infrastructure/logging/logger.interface';
-import { IAddUser, ResponseAddUser } from './addUser.interface';
+// Response import
 import { addUserResponse } from './addUser.response';
 
 @injectable()
-export class AddUser implements IAddUser {
+class AddUser implements IAddUser {
   constructor(
-    @inject(LOGGER_TYPE.Logger) private _logger: ILogger,
+    @inject(LOGGER_TYPE.Logger) private readonly _logger: ILogger,
     @inject(USER_REPOSITORY_TYPE.UserRepository)
-    private _repository: IUserRepository
-    // @inject(GET_USER_TYPE.GetUser) private _getUser: IGetUser
+    private readonly _repository: IUserRepository
   ) {}
 
   public async execute(
     userRequest: IAddUserRequest
   ): Promise<ResponseDomain<ResponseAddUser> | ResponseErrorDomain> {
-    // destructure the request data
+    // Destructure the request data
     const { name, email } = userRequest;
 
-    // check that email does not exist
+    // Check that email does not exist
     const checkUser = await this._repository.findUser(email);
     if (checkUser !== null) {
       throw new ResponseErrorDomain(addUserResponse.USER_EXISTS);
     }
 
-    // generate user domain instance
+    // Generate user domain instance
     const userDomain = new UserDomain(name, email);
 
-    // creating a new user
+    // Creating a new user
     const createdUser = await this._repository.createUser(userDomain);
 
-    // if all the process was successfully we return an OK status
+    // If all the process was successfully we return an OK status
     return new ResponseDomain(addUserResponse.CREATED, createdUser);
   }
 }
+
+export { AddUser };
