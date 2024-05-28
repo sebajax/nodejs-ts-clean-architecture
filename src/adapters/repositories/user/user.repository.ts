@@ -3,7 +3,10 @@ import { plainToClass } from 'class-transformer';
 import { inject, injectable } from 'inversify';
 import { Repository } from 'typeorm';
 // Interface import
-import { IUserRepository } from './user.repository.interface';
+import {
+  IUserRepository,
+  USER_REPOSITORY_TYPE,
+} from './user.repository.interface';
 // Entity import
 import { UserEntity } from './user.repository.entity';
 // Dto import
@@ -15,7 +18,7 @@ import { UserDomain } from '../../../domains/user.domain';
 @injectable()
 class UserRepository implements IUserRepository {
   constructor(
-    @inject(Repository<UserEntity>)
+    @inject(USER_REPOSITORY_TYPE.UserRepositoryEntity)
     private readonly _userRepository: Repository<UserEntity>
   ) {}
 
