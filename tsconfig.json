@@ -1,7 +1,7 @@
 {
   "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
-    "types": ["reflect-metadata"],
+    "types": ["reflect-metadata", "jest"],
     "moduleResolution": "node",
     "rootDir": "src",
     "outDir": "dist",
@@ -10,5 +10,5 @@
     "emitDecoratorMetadata": true,
     "strictPropertyInitialization": false
   },
-  "include": ["src/**/*.ts", "test/**/*.ts"]
+  "include": ["src/**/*.ts", "src/**/*.test.ts"]
 }
