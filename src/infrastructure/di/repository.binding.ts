@@ -14,7 +14,7 @@ import { AppDataSource } from '../database/db';
 // Bind Repository
 const repositoryBinding = new ContainerModule(bind => {
   // Bind the TypeORM repository
-  bind<Repository<UserEntity>>(Repository<UserEntity>)
+  bind<Repository<UserEntity>>(USER_REPOSITORY_TYPE.UserRepositoryEntity)
     .toDynamicValue(() => {
       return AppDataSource.getRepository(UserEntity);
     })
