@@ -14,15 +14,17 @@ import { container } from './infrastructure/di/inversify.config';
 import { Logger } from './infrastructure/logging/logger';
 import { LOGGER_TYPE } from './infrastructure/logging/logger.interface';
 import { LoggingMiddleware } from './infrastructure/middleware/logging.middleware';
+import { ErrorMiddleware } from './infrastructure/middleware/error.middleware';
 
 const server = new InversifyExpressServer(container);
 
-const loggingMiddleware = container.get<LoggingMiddleware>(LoggingMiddleware);
 const logger = container.get<Logger>(LOGGER_TYPE.Logger);
 
 server.setConfig(app => {
+  // Get logger container
+  const loggingMiddleware = container.get<LoggingMiddleware>(LoggingMiddleware);
   // Add logging in each request
-  app.use(loggingMiddleware.logRequest.bind(loggingMiddleware));
+  app.use(loggingMiddleware.logRequest());
   app.use(helmet());
   app.use(express.json());
   app.use(morgan('dev'));
@@ -35,9 +37,13 @@ server.setConfig(app => {
 });
 
 server.setErrorConfig(app => {
-  app.use(loggingMiddleware.logError.bind(loggingMiddleware));
+  // Get error container
+  const errorMiddleware = container.get<ErrorMiddleware>(ErrorMiddleware);
+  // If error was present catch the error and send a response
+  app.use(errorMiddleware.execute());
 });
 
+// Build the server
 const app = server.build();
 
 // Prefix all routes with '/v1'
