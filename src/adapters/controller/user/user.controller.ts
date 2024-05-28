@@ -9,8 +9,8 @@ import {
 } from 'inversify-express-utils';
 // Domain import
 import { IResponseDomain } from '../../../domains/response.domain';
-// Infrastructure import
-import { ValidationMiddleware } from '../../../infrastructure/middleware/validate.middleware';
+// Middleware import
+import { validate } from '../../../infrastructure/middleware/validate.middleware';
 // Use case import
 import {
   ADD_USER_TYPE,
@@ -28,7 +28,7 @@ class UserController {
     @inject(ADD_USER_TYPE.AddUser) private readonly _addUser: IAddUser
   ) {}
 
-  @httpPost('/', ValidationMiddleware.prototype.validate(addUserSchema))
+  @httpPost('/', validate(addUserSchema))
   async addUser(
     @request() req: Request,
     @response() res: Response
